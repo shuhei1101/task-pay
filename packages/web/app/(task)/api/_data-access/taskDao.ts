@@ -1,6 +1,6 @@
 import { DatabaseError } from "@/app/(core)/appError"
 import { taskExclusiveControl } from "./taskExclusiveControl"
-import { TaskDelete, TaskInsert, TaskUpdate } from "../_schema/taskEntity"
+import { TaskDelete, TaskInsert, TaskUpdate } from "../../_schema/taskEntity"
 import { serverSupabase } from "@/app/(core)/_supabase/serverSupabase"
 
 export const taskDao = {

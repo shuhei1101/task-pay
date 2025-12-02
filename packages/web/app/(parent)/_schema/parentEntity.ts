@@ -1,11 +1,11 @@
-import { z } from "zod";
+import { z } from "zod"
 
 /** DBの親スキーマ */
 export const ParentEntitySchema = z.object({
-  user_id: z.string(),
+  id: z.number(),
   family_id: z.number(),
   created_at: z.string(),
-  updated_at: z.string()
+  updated_at: z.string(),
 })
 export type ParentEntity = z.infer<typeof ParentEntitySchema>
 

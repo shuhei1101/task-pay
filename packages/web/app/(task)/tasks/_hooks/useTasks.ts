@@ -2,7 +2,7 @@
 
 import useSWR from "swr"
 import { TaskColumns } from "../../_schema/taskEntity"
-import { fetchTasks } from "../../_query/taskQuery"
+import { fetchFamilyTasks } from "../../api/_query/familyTaskQuery"
 import { SortOrder } from "@/app/(core)/appSchema"
 import { TaskFilterType } from "../_schema/taskFilterSchema"
 
@@ -13,7 +13,7 @@ export const useTasks = ({filter, sortColumn, sortOrder, page, pageSize}:{
   // 検索条件に紐づくタスクリストを取得する
   const { data, error, mutate, isLoading } = useSWR(
     ["タスクリスト", filter, sortColumn, sortOrder, page, pageSize],
-    () => fetchTasks({
+    () => fetchFamilyTasks({
       filter,
       sortColumn,
       sortOrder,

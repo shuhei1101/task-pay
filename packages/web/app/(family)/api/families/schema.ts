@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { FamilyCreateFormSchema } from "../new/_schema/familyCreateFormSchema"
+import { FamilyCreateFormSchema } from "../../families/new/_schema/familyCreateFormSchema"
 
 /** 家族作成リクエストスキーマ */
 export const FamilyCreateRequestSchema = z.object({

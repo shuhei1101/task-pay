@@ -1,10 +1,10 @@
 "use client"
-import { clientSupabase } from "@/app/(core)/_supabase/clientSupabase";
-import { appStorage } from "../../(core)/_sessionStorage/appStorage";
-import { useRouter } from "next/navigation";
-import { LOGIN_URL } from "@/app/(core)/appConstants";
-import { useEffect, useState } from "react";
-import { Session } from '@supabase/supabase-js';
+import { clientSupabase } from "@/app/(core)/_supabase/clientSupabase"
+import { appStorage } from "../../(core)/_sessionStorage/appStorage"
+import { useRouter } from "next/navigation"
+import { LOGIN_URL } from "@/app/(core)/appConstants"
+import { useEffect, useState } from "react"
+import { Session } from '@supabase/supabase-js'
 
 export const useSession = () => {
   const router = useRouter()
@@ -14,10 +14,7 @@ export const useSession = () => {
   useEffect(() => {
     /** 現在の認証状態を確認する */
     const getSession = async () => {
-      // セッションストレージからセッション情報を取得する
-      let session = appStorage.supabaseSession.get()
-      if (!session) {
-        const { data } = await clientSupabase.auth.getSession();
+        const { data } = await clientSupabase.auth.getSession()
         // ログインに失敗した場合
         if (!data.session) {
           // 次画面で表示するメッセージを登録する
@@ -28,9 +25,7 @@ export const useSession = () => {
           return undefined
         }
         // ログインに成功した場合、セッションストレージに格納する
-        session = data.session
-        appStorage.supabaseSession.set(session)
-      }
+        appStorage.supabaseSession.set(data.session)
       
       return session
     }

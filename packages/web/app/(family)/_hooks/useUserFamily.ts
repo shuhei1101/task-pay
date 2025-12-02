@@ -1,6 +1,6 @@
 "use client"
 import useSWR from "swr"
-import { fetchFamily } from "../_query/familyQuery"
+import { fetchFamily } from "../api/_query/familyQuery"
 import { fetchChild } from "@/app/(child)/_query/childQuery"
 import { fetchParent } from "@/app/(parent)/_query/parentQuery"
 import { useLoginUserInfo } from "@/app/(auth)/_hooks/useLoginUserInfo"

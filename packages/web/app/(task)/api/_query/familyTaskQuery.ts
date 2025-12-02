@@ -1,18 +1,17 @@
 import { z } from "zod"
-import { TaskEntity, TaskColumns, TaskEntitySchema } from "../_schema/taskEntity";
+import { TaskColumns, TaskEntitySchema } from "../../_schema/taskEntity";
 import { SortOrder } from "@/app/(core)/appSchema";
 import { clientSupabase } from "@/app/(core)/_supabase/clientSupabase";
-import { RawTaskStatus } from "../_schema/taskStatusSchema";
-import { TaskFilterType } from "../tasks/_schema/taskFilterSchema";
-import { TaskTagEntitySchema } from "../_schema/taskTagEntity";
+import { TaskFilterType } from "../../tasks/_schema/taskFilterSchema";
+import { TaskTagEntitySchema } from "../../_schema/taskTagEntity";
 
 /** 取得結果の型 */
-const FetchTasksResult = z.array(TaskEntitySchema.extend({
+const FetchFamilyTasksResult = z.array(TaskEntitySchema.extend({
   task_tags: z.array(TaskTagEntitySchema)
 }))
 
 /** 検索条件に一致するタスクを取得する */
-export const fetchTasks = async ({
+export const fetchFamilyTasks = async ({
   sortColumn,
   sortOrder,
   filter,
@@ -50,7 +49,7 @@ export const fetchTasks = async ({
 
     if (error) throw error
 
-    const fetchedTasks = FetchTasksResult.parse(data)
+    const fetchedTasks = FetchFamilyTasksResult.parse(data)
 
     // 指定タグに完全一致しているタスクを絞り込む
     const tasksWithAllTags = fetchedTasks.filter(task =>
@@ -66,12 +65,12 @@ export const fetchTasks = async ({
 }
 
 /** 取得結果の型 */
-const FetchTaskResult = TaskEntitySchema.extend({
+const FetchFamilyTaskResult = TaskEntitySchema.extend({
   task_tags: z.array(TaskTagEntitySchema)
 })
 
 /** IDに紐づくタスクを取得する */
-export const fetchTask = async (id: number) => {
+export const fetchFamilyTask = async (id: number) => {
   // データを取得する
   const { data, error } = await clientSupabase.from("tasks")
       .select(`
@@ -83,18 +82,5 @@ export const fetchTask = async (id: number) => {
     // エラーをチェックする
     if (error) throw error;
 
-    return FetchTaskResult.parse(data)
-}
-
-
-/** 全タスクステータスを取得する */
-export const fetchTaskStatuses = async () => {
-  // データを取得する
-  const { data, error } = await clientSupabase.from("task_statuses")
-    .select('*')
-
-  // エラーをチェックする
-  if (error) throw error;
-
-  return data as RawTaskStatus[] ?? []
+    return FetchFamilyTaskResult.parse(data)
 }

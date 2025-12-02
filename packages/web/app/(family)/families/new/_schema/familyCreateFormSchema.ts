@@ -1,4 +1,4 @@
-import { DisplayId, LocalName, OnlineName } from "@/app/(family)/_schema/familySchema"
+import { DisplayId, LocalName, OnlineName } from "@/app/(family)/_schema/familyEntity"
 import { Icon } from "@/app/(shared)/_icon/_schema/iconSchema"
 import { Birthday, UserName } from "@/app/(user)/_schema/userSchema"
 import { z } from "zod"

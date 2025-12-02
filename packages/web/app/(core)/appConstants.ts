@@ -12,13 +12,13 @@ export const LOGIN_URL = `/login`
 // タスク
 export const TASKS_URL = `/tasks`
 export const TASK_NEW_URL = `${TASKS_URL}/new`
-export const TASK_API_URL = `${TASKS_URL}/api`
-export const TASK_FAMILY_API_URL = `${TASK_API_URL}/family`
+export const TASK_API_URL = `/api/tasks/`
+export const FAMILY_TASK_API_URL = `/api/family-tasks/`
 
 // 家族
 export const FAMILIES_URL = `/families`
 export const FAMILY_NEW_URL = `${FAMILIES_URL}/new`
-export const FAMILY_API_URL = `${FAMILIES_URL}/api`
+export const FAMILY_API_URL = `/api/families`
 
 // プロジェクト
 export const PROJECTS_URL = `/projects`
@@ -29,3 +29,8 @@ export const PROJECT_API_URL = `${PROJECTS_URL}/api`
 export const USERS_URL = `/users`
 export const USER_NEW_URL = `${USERS_URL}/new`
 export const USER_API_URL = `${USERS_URL}/api`
+
+// 子供
+export const CHILDREN_URL = `/children`
+export const CHILD_NEW_URL = `${CHILDREN_URL}/new`
+export const CHILD_API_URL = `${CHILDREN_URL}/api`

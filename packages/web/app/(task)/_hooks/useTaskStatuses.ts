@@ -1,7 +1,7 @@
 "use client"
 
 import useSWR from "swr"
-import { fetchTaskStatuses } from "../_query/taskQuery"
+import { fetchTaskStatuses } from "../api/_query/familyTaskQuery"
 
 /** タスクステータスを取得する */
 export const useTaskStatuses = () => {

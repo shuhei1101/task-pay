@@ -1,5 +1,5 @@
+import { TaskFormSchema } from "@/app/(task)/tasks/[id]/_schema/taskFormSchema"
 import { z } from "zod"
-import { TaskFormSchema } from "../[id]/_schema/childFormSchema"
 
 /** タスク登録リクエストスキーマ */
 export const RegisterTaskRequestSchema = z.object({

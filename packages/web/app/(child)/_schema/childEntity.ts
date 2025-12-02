@@ -2,7 +2,7 @@ import { z } from "zod"
 
 /** DBの子供スキーマ */
 export const ChildEntitySchema = z.object({
-  user_id: z.string(),
+  id: z.number(),
   family_id: z.number(),
   min_savings: z.number().optional(),
   current_savings: z.number().optional(),
@@ -22,4 +22,4 @@ export type ChildUpdate = z.infer<typeof ChildUpdate>
 export type ChildDelete = z.infer<typeof ChildDelete>
 
 // 子供のカラム名
-export type ChildColumns = keyof ChildEntity;
+export type ChildColumns = keyof ChildEntity

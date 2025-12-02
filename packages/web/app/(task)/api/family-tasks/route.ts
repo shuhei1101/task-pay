@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { handleServerError } from "@/app/(core)/errorHandler";
-import { RegisterTaskRequestSchema, UpdateTaskRequestSchema } from "../schema";
-import { taskDao } from "@/app/(task)/_data-access/taskDao";
 import { TaskDeleteSchema } from "@/app/(task)/_schema/taskEntity";
+import { RegisterTaskRequestSchema, UpdateTaskRequestSchema } from "@/app/(child)/children/api/schema";
+import { taskDao } from "../_data-access/taskDao";
 
 
 /** タスクを登録する */
@@ -12,7 +12,7 @@ export async function POST(
   try {
     // bodyからタスクを取得する
     const body = await request.json()
-    const data  = RegisterTaskRequestSchema.parse(body);
+    const data  = RegisterTaskRequestSchema.parse(body)
 
     // タスクを登録する
     await taskDao.insert({

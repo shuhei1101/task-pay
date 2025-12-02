@@ -1,4 +1,4 @@
-import { FamilyEntitySchema } from "../_schema/familySchema";
+import { FamilyEntitySchema } from "../../_schema/familyEntity";
 import { clientSupabase } from "@/app/(core)/_supabase/clientSupabase";
 
 /** IDに紐づく家族を取得する */

@@ -1,11 +1,17 @@
+import { SupabaseClient } from "@supabase/supabase-js"
 import { ParentEntitySchema } from "../_schema/parentEntity"
-import { clientSupabase } from "@/app/(core)/_supabase/clientSupabase"
 
 /** IDに紐づく親を取得する */
-export const fetchParent = async (userId: string) => {
+export const fetchParent = async ({supabase, userId}: {
+  supabase: SupabaseClient,
+  userId: string
+}) => {
   // データを取得する
-  const { data, error } = await clientSupabase.from("parents")
-    .select('*')
+  const { data, error } = await supabase.from("parents")
+    .select(`
+      *,
+      
+    `)
     .eq("user_id", userId)
 
   // エラーをチェックする

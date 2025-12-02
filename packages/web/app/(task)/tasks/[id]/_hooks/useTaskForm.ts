@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import useSWR from "swr"
-import { fetchTask } from "../../../_query/taskQuery"
+import { fetchFamilyTask } from "../../../api/_query/familyTaskQuery"
 import { useEffect, useState } from "react"
 import { TaskFormSchema, TaskFormType } from "../_schema/taskFormSchema"
 import { isSameArray } from "@/app/(shared)/util"
@@ -32,7 +32,7 @@ export const useTaskForm = ({id}: {id: number}) => {
   // IDに紐づくタスクを取得する
   const { data: taskEntity, error, mutate, isLoading } = useSWR(
     id ? ["タスク", id] : null,
-    () => fetchTask(id)
+    () => fetchFamilyTask(id)
   )
 
   // エラーをチェックする

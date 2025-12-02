@@ -1,6 +1,6 @@
 import { DatabaseError } from "@/app/(core)/appError"
 import { familyExclusiveControl } from "./familyExclusiveControl"
-import { FamilyDelete, FamilyInsert, FamilyUpdate } from "../_schema/familySchema"
+import { FamilyDelete, FamilyInsert, FamilyUpdate } from "../../_schema/familyEntity"
 import { serverSupabase } from "@/app/(core)/_supabase/serverSupabase"
 import { UserInsert } from "@/app/(user)/_schema/userSchema"
 

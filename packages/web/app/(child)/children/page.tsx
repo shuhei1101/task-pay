@@ -7,7 +7,6 @@ import { TASKS_URL } from "../../(core)/appConstants"
 import { AuthorizedPageLayout } from "../../(auth)/_components/AuthorizedPageLayout"
 import { Button } from "@mantine/core"
 import Link from "next/link"
-import { useLoginUserInfo } from "@/app/(auth)/_hooks/useLoginUserInfo"
 import { useChildren } from "./_hooks/useChildren"
 
 function ChildrenContent() {
@@ -53,8 +52,8 @@ function ChildrenContent() {
         columns={[
           { accessor: 'id', title: 'ID', sortable: true, resizable: true,
             render: (child) => {
-            const url = `${TASKS_URL}/${child.id}`
-            return (<Link href={url} className="text-blue-400">{child.id}</Link>)}
+            const url = `${TASKS_URL}/${child.user_id}`
+            return (<Link href={url} className="text-blue-400">{child.user_id}</Link>)}
           },
           { accessor: 'name', title: '子供名', sortable: true, resizable: true },
         ]}
