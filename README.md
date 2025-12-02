@@ -1,6 +1,3 @@
-[日本語](README.md) / [English](docs/en/README.md) /
-- [開発者向けWiki](docs/ja/index.md)
-
 ## Allowance Questboard(お小遣いクエストボード)
 本アプリは、親が「クエスト」と呼ばれるお手伝いや成長を促すタスクを作成し、\
 子供が自らでクエストを自由に選んで挑戦できるアプリです。\
