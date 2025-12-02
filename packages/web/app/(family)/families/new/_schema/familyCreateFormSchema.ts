@@ -1,6 +1,6 @@
 import { DisplayId, LocalName, OnlineName } from "@/app/(family)/_schema/familyEntity"
 import { Icon } from "@/app/(shared)/_icon/_schema/iconSchema"
-import { Birthday, UserName } from "@/app/(user)/_schema/userSchema"
+import { Birthday, UserName } from "@/app/(user)/_schema/profileEntity"
 import { z } from "zod"
 
 /** 家族フォームスキーマ */

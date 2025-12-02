@@ -2,13 +2,13 @@ import { DatabaseError } from "@/app/(core)/appError"
 import { familyExclusiveControl } from "./familyExclusiveControl"
 import { FamilyDelete, FamilyInsert, FamilyUpdate } from "../../_schema/familyEntity"
 import { serverSupabase } from "@/app/(core)/_supabase/serverSupabase"
-import { UserInsert } from "@/app/(user)/_schema/userSchema"
+import { ProfileInsert } from "@/app/(user)/_schema/profileEntity"
 
 export const familyDao = {
   /** 家族を挿入する */
   insert: async ({family, parent}: {
     family: FamilyInsert,
-    parent: UserInsert,
+    parent: ProfileInsert,
   }) => {
     // レコードを挿入する
     const { data, error } = await serverSupabase.rpc("insert_family_and_parent", {

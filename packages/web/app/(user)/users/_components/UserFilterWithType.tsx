@@ -2,7 +2,7 @@
 
 import { Accordion, Button, Input } from "@mantine/core"
 import { Dispatch, SetStateAction, useState } from "react"
-import { UserFilterSchema } from "../../_schema/userSchema"
+import { UserFilterSchema } from "../../_schema/profileEntity"
 import { UserTypeCombobox } from "../[id]/_component/UserTypeCombobox"
 import { RawUserType } from "../../_schema/userTypeSchema"
 

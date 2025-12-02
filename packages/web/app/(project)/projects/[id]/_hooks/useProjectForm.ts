@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { FetchProjectResult } from "../../../_query/projectQuery"
 import { useEffect, useState } from "react"
 import { projectFormSchema, ProjectFormSchema } from "@/app/(project)/_schema/projectSchema"
-import { UserEntitySchema } from "@/app/(user)/_schema/userSchema"
+import { ProfileEntitySchema } from "@/app/(user)/_schema/profileEntity"
 
 /** プロジェクトフォームを取得する */
 export const useProjectForm = ({fetchedProject, fetchedMembers}: {fetchedProject?: FetchProjectResult, fetchedMembers: UserEntitySchema[]}) => {

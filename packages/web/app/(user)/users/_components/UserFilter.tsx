@@ -2,7 +2,7 @@
 
 import { Accordion, Button, Input } from "@mantine/core"
 import { Dispatch, SetStateAction, useState } from "react"
-import { UserFilterSchema } from "../../_schema/userSchema"
+import { UserFilterSchema } from "../../_schema/profileEntity"
 
 export const UserFilter = ({filter, setFilter, handleSearch}: {
   filter: UserFilterSchema,

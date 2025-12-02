@@ -1,4 +1,4 @@
-import { UserEntitySchema } from "@/app/(user)/_schema/userSchema"
+import { ProfileEntitySchema } from "@/app/(user)/_schema/profileEntity"
 import { Button, Table } from "@mantine/core"
 
 const BTN_SIZE = 60

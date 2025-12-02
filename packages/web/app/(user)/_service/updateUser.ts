@@ -1,5 +1,5 @@
 import { userDao } from "../_data-access/userDao"
-import { UserFormSchema } from "../_schema/userSchema"
+import { UserFormSchema } from "../_schema/profileEntity"
 
 /** ユーザを更新する */
 export const updateUser = async (user: UserFormSchema) => {

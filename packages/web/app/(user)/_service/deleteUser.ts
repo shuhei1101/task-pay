@@ -1,5 +1,5 @@
 import { userDao } from "../_data-access/userDao"
-import { UserFormSchema } from "../_schema/userSchema"
+import { UserFormSchema } from "../_schema/profileEntity"
 
 /** ユーザを削除する */
 export const deleteUser = async (user: UserFormSchema) => {

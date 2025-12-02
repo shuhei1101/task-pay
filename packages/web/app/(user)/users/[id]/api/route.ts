@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { handleServerError } from "@/app/(core)/errorHandler";
-import { userFormSchema, UserFormSchema } from "../../../_schema/userSchema";
+import { userFormSchema, UserFormSchema } from "../../../_schema/profileEntity";
 import { createUser } from "../../../_service/createUser";
 import { updateUser } from "../../../_service/updateUser";
 import { deleteUser } from "../../../_service/deleteUser";

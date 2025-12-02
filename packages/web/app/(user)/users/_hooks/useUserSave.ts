@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { handleAppError } from "@/app/(core)/errorHandler"
-import { UserFormSchema } from "../../_schema/userSchema"
+import { UserFormSchema } from "../../_schema/profileEntity"
 import { userApi } from "../../_api-client/userApi"
 import toast from "react-hot-toast"
 

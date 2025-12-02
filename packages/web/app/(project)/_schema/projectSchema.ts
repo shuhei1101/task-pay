@@ -1,4 +1,4 @@
-import { UserEntitySchema, UserEntitySchema } from "@/app/(user)/_schema/userSchema";
+import { ProfileEntitySchema, ProfileEntitySchema } from "@/app/(user)/_schema/profileEntity";
 import { z } from "zod";
 import { FetchProjectResult } from "../_query/projectQuery";
 
@@ -36,7 +36,7 @@ export const projectFormSchema = z.object({
   /** 公開フラグ */
   is_public: z.boolean(),
   /** プロジェクトメンバーのID */
-  members: z.array(UserEntitySchema).min(1, {
+  members: z.array(ProfileEntitySchema).min(1, {
     message: "プロジェクトには最低1人のメンバーが必要です。"
   }),
   /** 作成日時 */

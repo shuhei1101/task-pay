@@ -1,5 +1,5 @@
 import { handleAPIError } from "@/app/(core)/errorHandler";
-import { UserFormSchema } from "../_schema/userSchema";
+import { UserFormSchema } from "../_schema/profileEntity";
 import { USER_API_URL } from "@/app/(core)/appConstants";
 import { RegisterUserResponse } from "../users/[id]/api/route";
 

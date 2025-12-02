@@ -2,7 +2,7 @@
 import { DataTable, DataTableSortStatus } from "mantine-datatable"
 import { useState } from "react"
 import { Button, Modal } from "@mantine/core"
-import { UserColumns, UserFilterSchema, UserEntitySchema } from "../../_schema/userSchema"
+import { ProfileColumns, UserFilterSchema, ProfileEntitySchema } from "../../_schema/profileEntity"
 import { useUsers } from "../_hooks/useUsers"
 import { UserFilter } from "./UserFilter"
 
@@ -19,7 +19,7 @@ export const UserSelectPopup = ({opened ,close, handleUsers}: {
 
   /** ソート状態 */
   const [sortStatus, setSortStatus] = useState<DataTableSortStatus<UserEntitySchema>>({
-    columnAccessor: 'name' as UserColumns,
+    columnAccessor: 'name' as ProfileColumns,
     direction: 'asc',
   })
 
@@ -35,7 +35,7 @@ export const UserSelectPopup = ({opened ,close, handleUsers}: {
   // ユーザ一覧を取得する
   const { fetchedUsers, totalRecords } = useUsers({
     filter: searchFilter,
-    sortColumn: sortStatus.columnAccessor as UserColumns,
+    sortColumn: sortStatus.columnAccessor as ProfileColumns,
     sortOrder: sortStatus.direction,
     page,
     pageSize

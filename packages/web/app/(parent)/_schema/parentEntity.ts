@@ -1,3 +1,4 @@
+import { ProfileEntitySchema } from "@/app/(user)/_schema/profileEntity"
 import { z } from "zod"
 
 /** DBの親スキーマ */
@@ -16,3 +17,8 @@ export const ParentDeleteSchema = ParentEntitySchema.pick({id: true, updated_at:
 export type ParentInsert = z.infer<typeof ParentInsertSchema>
 export type ParentUpdate = z.infer<typeof ParentUpdateSchema>
 export type ParentDelete = z.infer<typeof ParentDeleteSchema>
+
+export const ParentWithProfileSchema = ParentEntitySchema.extend({
+  profiles: ProfileEntitySchema
+})
+export type ParentWithProfile = z.infer<typeof ParentWithProfileSchema>

@@ -1,9 +1,9 @@
 'use client'
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { createUserSchemaFromEntity, UserEntitySchema, UserFormSchema, userFormSchema } from "../../../_schema/userSchema"
+import { createUserSchemaFromEntity, ProfileEntitySchema, UserFormSchema, userFormSchema } from "../../../_schema/profileEntity"
 import useSWR from "swr"
-import { fetchUser } from "../../../_query/userQuery"
+import { fetchProfile } from "../../../_query/profileQuery"
 import { useEffect, useState } from "react"
 
 /** ユーザフォームを取得する */
@@ -34,7 +34,7 @@ export const useUserForm = ({id}: {id?: string}) => {
   // IDに紐づくユーザを取得する
   const { data: userEntity, error, mutate, isLoading } = useSWR(
     id ? ["ユーザ", id] : null,
-    () => fetchUser(id)
+    () => fetchProfile(id)
   )
 
   // エラーをチェックする

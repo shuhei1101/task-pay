@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { userFormSchema, UserFormSchema } from "../../(user)/_schema/userSchema"
+import { userFormSchema, UserFormSchema } from "../../(user)/_schema/profileEntity"
 
 /** ユーザフォームを取得する */
 export const useUserForm = () => {

@@ -10,7 +10,7 @@ import { useProjectForm } from "../_hooks/useProjectForm";
 import { ProjectMemberTable } from "./ProjectMemberTable";
 import { UserSelectPopup } from "@/app/(user)/users/_components/UserSelectPopup";
 import { useDisclosure } from "@mantine/hooks";
-import { UserEntitySchema } from "@/app/(user)/_schema/userSchema";
+import { ProfileEntitySchema } from "@/app/(user)/_schema/profileEntity";
 import { PROJECTS_URL } from "@/app/(core)/appConstants";
 import { useLoginUserInfo } from "@/app/(auth)/_hooks/useLoginUserInfo";
 

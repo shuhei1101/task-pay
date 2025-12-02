@@ -1,11 +1,11 @@
 import { DatabaseError } from "@/app/(core)/appError"
 import { serverSupabase } from "@/app/(core)/_supabase/serverSupabase"
-import { UserDelete, UserInsert, UserUpdate } from "../_schema/userSchema"
+import { ProfileDelete, ProfileInsert, ProfileUpdate } from "../_schema/profileEntity"
 import { userExclusiveControl } from "./userExclusiveControl"
 
 export const userDao = {
   /** ユーザを挿入する */
-  insert: async (record: UserInsert) => {
+  insert: async (record: ProfileInsert) => {
     // レコードを挿入する
     const { data, error } = await serverSupabase.from("profiles")
     .insert([record])
@@ -22,7 +22,7 @@ export const userDao = {
   },
 
   /** ユーザを更新する */
-  update: async (record: UserUpdate) => {
+  update: async (record: ProfileUpdate) => {
     // 存在をチェックする
     const beforeUser = await userExclusiveControl.existsCheck(record.user_id)
     
@@ -45,7 +45,7 @@ export const userDao = {
   },
 
   /** ユーザを削除する */
-  delete: async (record: UserDelete) => {
+  delete: async (record: ProfileDelete) => {
     // 存在をチェックする
     const beforeUser = await userExclusiveControl.existsCheck(record.user_id)
     

@@ -4,6 +4,7 @@ import { SortOrder } from "@/app/(core)/appSchema";
 import { clientSupabase } from "@/app/(core)/_supabase/clientSupabase";
 import { TaskFilterType } from "../../tasks/_schema/taskFilterSchema";
 import { TaskTagEntitySchema } from "../../_schema/taskTagEntity";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 /** 取得結果の型 */
 const FetchFamilyTasksResult = z.array(TaskEntitySchema.extend({
@@ -70,7 +71,10 @@ const FetchFamilyTaskResult = TaskEntitySchema.extend({
 })
 
 /** IDに紐づくタスクを取得する */
-export const fetchFamilyTask = async (id: number) => {
+export const fetchFamilyTask = async ({}: {
+  supabase: SupabaseClient,
+  familyId: number
+}) => {
   // データを取得する
   const { data, error } = await clientSupabase.from("tasks")
       .select(`

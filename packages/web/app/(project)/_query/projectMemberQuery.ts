@@ -1,4 +1,4 @@
-import { UserEntitySchema } from "@/app/(user)/_schema/userSchema";
+import { ProfileEntitySchema } from "@/app/(user)/_schema/profileEntity";
 import { clientSupabase } from "@/app/(core)/_supabase/clientSupabase";
 
 /** プロジェクトIDに紐づくプロジェクトメンバーIDを取得する */

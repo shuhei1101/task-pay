@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { UserFormSchema, userFormSchema } from "../../_schema/userSchema";
+import { UserFormSchema, userFormSchema } from "../../_schema/profileEntity";
 import { createUser } from "../../_service/createUser";
 import { updateUser } from "../../_service/updateUser";
 import { deleteUser } from "../../_service/deleteUser";

@@ -14,6 +14,14 @@ export class AppError extends Error {
   }
 }
 
+/** サーバ内失敗 */
+export const SERVER_ERROR_CODE = 'AUTH_ERROR'
+export class ServerError extends AppError {
+  constructor(message = 'サーバ内例外が発生しました。') {
+    super(SERVER_ERROR_CODE, 500, message);
+  }
+}
+
 /** データベース例外 */
 export const DATABASE_ERROR_CODE = 'DB_ERROR'
 export class DatabaseError extends AppError {

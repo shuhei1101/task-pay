@@ -1,10 +1,10 @@
 import { DatabaseError } from "@/app/(core)/appError";
-import { fetchUser } from "../_query/userQuery";
+import { fetchProfile } from "../_query/profileQuery";
 
 export const userExclusiveControl = {
   /** 既に存在するかどうかを確認する */
   existsCheck: async (user_id: string) => {
-    const record = await fetchUser(user_id)
+    const record = await fetchProfile(user_id)
     if (!record) throw new DatabaseError("既に削除されたユーザです。")
     return record
   },
