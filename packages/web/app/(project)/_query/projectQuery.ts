@@ -1,6 +1,6 @@
 import { RawProject, ProjectColumns, ProjectFilterSchema } from "../_schema/projectSchema";
-import { SortOrder } from "@/app/(core)/appSchema";
-import { clientSupabase } from "@/app/(core)/_supabase/clientSupabase";
+import { SortOrder } from "@/app/(core)/schema";
+import { clientSupabase } from "@/app/(core)/_supabase/client";
 import { ProfileEntitySchema } from "@/app/(user)/_schema/profileEntity";
 
 export type FetchProjectResult = RawProject & {

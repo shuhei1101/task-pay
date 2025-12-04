@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { handleServerError } from "@/app/(core)/errorHandler"
-import { fetchFamily } from "@/app/(family)/api/_query/familyQuery"
+import { fetchFamily } from "@/app/(family)/query"
 
 /** 家族を取得する */
 export async function GET(
@@ -12,9 +12,9 @@ export async function GET(
     const id = params.id
 
     // 家族を取得する
-    const task = await fetchFamily(id)
+    const quest = await fetchFamily(id)
 
-    return NextResponse.json(task)
+    return NextResponse.json(quest)
   } catch (err) {
     return handleServerError(err)
   }

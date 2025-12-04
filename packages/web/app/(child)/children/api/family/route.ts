@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { deleteTask } from "../../../_service/deleteTask";
+import { deleteQuest } from "../../../_service/deleteQuest";
 import { handleServerError } from "@/app/(core)/errorHandler";
-import { RegisterTaskRequest, RegisterTaskRequestSchema, UpdateTaskRequestSchema } from "../schema";
-import { taskDao } from "@/app/(task)/api/_data-access/taskDao";
-import { TaskDeleteSchema } from "@/app/(task)/_schema/taskEntity";
+import { RegisterQuestRequest, RegisterQuestRequestSchema, UpdateQuestRequestSchema } from "../schema";
+import { questDao } from "@/app/(quest)/api/db";
+import { QuestDeleteSchema } from "@/app/(quest)/_schema/entity";
 
 
 /** タスクを登録する */
@@ -13,11 +13,11 @@ export async function POST(
   try {
     // bodyからタスクを取得する
     const body = await request.json()
-    const data  = RegisterTaskRequestSchema.parse(body);
+    const data  = RegisterQuestRequestSchema.parse(body);
 
     // タスクを登録する
-    await taskDao.insert({
-      task: {
+    await questDao.insert({
+      quest: {
         name: data.form.name,
         icon: data.form.icon,
         type: "family"
@@ -38,16 +38,16 @@ export async function PUT(
   try {
     // bodyからタスクを取得する
     const body = await request.json()
-    const data = UpdateTaskRequestSchema.parse(body);
+    const data = UpdateQuestRequestSchema.parse(body);
 
     // タスクを更新する
-    await taskDao.update({
+    await questDao.update({
       tags: data.form.tags,
-      task: {
+      quest: {
         icon: data.form.icon,
         type: "family",
         name: data.form.name,
-        id: data.task_id,
+        id: data.quest_id,
         updated_at: data.updated_at
       }
     })
@@ -66,10 +66,10 @@ export async function DELETE(
   try {
     // bodyからタスクを取得する
     const body = await request.json()
-    const data = TaskDeleteSchema.parse(body);
+    const data = QuestDeleteSchema.parse(body);
 
     // タスクを削除する
-    await taskDao.delete(data)
+    await questDao.delete(data)
 
     return NextResponse.json({});
   } catch (err) {

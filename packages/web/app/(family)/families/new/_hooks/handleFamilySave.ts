@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation"
 import { familyApi } from "../../../_api-client/familyApi"
 import { appStorage } from "@/app/(core)/_sessionStorage/appStorage"
 import { handleAppError } from "@/app/(core)/errorHandler"
-import { TASKS_URL } from "@/app/(core)/appConstants"
+import { QUESTS_URL } from "@/app/(core)/constants"
 import { FamilyCreateForm } from "../_schema/familyCreateFormSchema"
 
 export const useFamilySave = () => {
@@ -27,7 +27,7 @@ export const useFamilySave = () => {
         appStorage.feedbackMessage.set('家族を登録しました')
           
         // タスク一覧画面に遷移する
-        router.push(`${TASKS_URL}`)
+        router.push(`${QUESTS_URL}`)
       }
     } catch (err) {
       handleAppError(err, router)

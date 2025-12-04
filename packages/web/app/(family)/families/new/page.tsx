@@ -3,7 +3,7 @@ import { AuthorizedPageLayout } from "@/app/(auth)/_components/AuthorizedPageLay
 import { ActionIcon, Box, Button, Checkbox, Group, Input, LoadingOverlay, Space, Textarea} from "@mantine/core"
 import { DateInput } from '@mantine/dates';
 import { FormBackButton } from "@/app/(shared)/_components/FormBackButton"
-import { TASKS_URL } from "@/app/(core)/appConstants"
+import { QUESTS_URL } from "@/app/(core)/constants"
 import { IconAt } from "@tabler/icons-react"
 import { IconSelectPopup } from '@/app/(shared)/_icon/IconSelectPopup'
 import { useDisclosure } from '@mantine/hooks'
@@ -39,7 +39,7 @@ export default function Page() {
   return (
     <>
       <AuthorizedPageLayout title={"家族作成"} 
-      actionButtons={<FormBackButton isValueChanged={isValueChanged} previousScreenURL={TASKS_URL} />}>
+      actionButtons={<FormBackButton isValueChanged={isValueChanged} previousScreenURL={QUESTS_URL} />}>
         <div>
 
         <Box pos="relative" className="max-w-120">

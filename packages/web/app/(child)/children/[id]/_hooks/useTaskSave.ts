@@ -1,27 +1,27 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { taskApi } from "../../../_api-client/taskApi"
+import { questApi } from "../../../_api-client/questApi"
 import { appStorage } from "@/app/(core)/_sessionStorage/appStorage"
 import { handleAppError } from "@/app/(core)/errorHandler"
-import { TASKS_URL } from "@/app/(core)/appConstants"
-import { RegisterTaskRequest } from "../../api/schema"
+import { QUESTS_URL } from "@/app/(core)/constants"
+import { RegisterQuestRequest } from "../../api/schema"
 
 /** 新規作成ボタン押下時のハンドル */
-export const useTaskSave = () => {
+export const useQuestSave = () => {
   const router = useRouter()
-  const handleSave = async (request: RegisterTaskRequest) => {
+  const handleSave = async (request: RegisterQuestRequest) => {
     try {
       // 登録確認を行う
       if (window.confirm('登録します。よろしいですか？')) {
         // タスクを新規作成する
-        await taskApi.create(request)
+        await questApi.create(request)
     
         // 次画面で表示するメッセージを登録する
         appStorage.feedbackMessage.set('タスクを登録しました')
           
         // タスク一覧画面に戻る
-        router.push(`${TASKS_URL}`)
+        router.push(`${QUESTS_URL}`)
       }
     } catch (err) {
       handleAppError(err, router)

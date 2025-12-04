@@ -2,8 +2,8 @@
 
 import useSWR from "swr"
 import { ProfileColumns, UserFilterSchema } from "../../_schema/profileEntity"
-import { fetchUsers } from "../../_query/profileQuery"
-import { SortOrder } from "@/app/(core)/appSchema"
+import { fetchUsers } from "../../query"
+import { SortOrder } from "@/app/(core)/schema"
 
 /** ユーザリストを取得する */
 export const useUsers = ({filter, sortColumn, sortOrder, page, pageSize}:{

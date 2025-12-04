@@ -2,16 +2,16 @@
 
 import useSWR from "swr"
 import { ChildColumns } from "../../_schema/childEntity"
-import { SortOrder } from "@/app/(core)/appSchema"
+import { SortOrder } from "@/app/(core)/schema"
 import { fetchChildren } from "../../_query/childQuery"
 
-/** タスクリストを取得する */
+/** クエストリストを取得する */
 export const useChildren = ({sortColumn, sortOrder, page, pageSize}:{
   sortColumn: ChildColumns, sortOrder: SortOrder, page: number, pageSize: number}) => {
 
-  // 検索条件に紐づくタスクリストを取得する
+  // 検索条件に紐づくクエストリストを取得する
   const { data, error, mutate, isLoading } = useSWR(
-    ["タスクリスト", sortColumn, sortOrder, page, pageSize],
+    ["クエストリスト", sortColumn, sortOrder, page, pageSize],
     () => fetchChildren({
       sortColumn,
       sortOrder,

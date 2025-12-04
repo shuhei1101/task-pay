@@ -37,7 +37,7 @@ export default function RootLayout({
     <React.StrictMode>
       <html lang="ja" {...mantineHtmlProps}>
         <head>
-          <title>タスクペイ</title>
+          <title>クエストペイ</title>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
           <ColorSchemeScript />
         </head>

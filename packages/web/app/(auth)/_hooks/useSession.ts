@@ -1,10 +1,10 @@
 "use client"
-import { clientSupabase } from "@/app/(core)/_supabase/clientSupabase"
 import { appStorage } from "../../(core)/_sessionStorage/appStorage"
 import { useRouter } from "next/navigation"
-import { LOGIN_URL } from "@/app/(core)/appConstants"
+import { LOGIN_URL } from "@/app/(core)/constants"
 import { useEffect, useState } from "react"
 import { Session } from '@supabase/supabase-js'
+import { createClient } from "@/app/(core)/_supabase/client"
 
 export const useSession = () => {
   const router = useRouter()
@@ -14,7 +14,7 @@ export const useSession = () => {
   useEffect(() => {
     /** 現在の認証状態を確認する */
     const getSession = async () => {
-        const { data } = await clientSupabase.auth.getSession()
+        const { data } = await createClient().auth.getSession()
         // ログインに失敗した場合
         if (!data.session) {
           // 次画面で表示するメッセージを登録する

@@ -1,9 +1,8 @@
 import { Button, Input, Modal, Space, Text } from "@mantine/core"
-import { useLoginUserInfo } from "../_hooks/useLoginUserInfo"
 import { useRouter } from "next/navigation"
-import { FAMILY_NEW_URL } from "@/app/(core)/appConstants"
-import { useUserFamily } from "@/app/(family)/_hooks/useUserFamily"
+import { FAMILY_NEW_URL } from "@/app/(core)/constants"
 import { useEffect } from "react"
+import { useLoginUserInfo } from "../_hooks/useLoginUserInfo"
 
 
 /** ログインタイプ選択ポップアップ */
@@ -17,12 +16,12 @@ export const LoginTypeSelectPopup = ({opened ,close}: {
   // const { handleCreateFamily } = useFamilyCreate({close})
 
   /** ユーザIDに紐づく家族情報 */
-  const { parent, family, child, isLoading, mutate } = useUserFamily()
+  const { userInfo, refresh } = useLoginUserInfo()
 
   useEffect(() => {
     if (!opened) return
-    mutate()
-    console.log("家族情報:", family)
+    console.log("ユーザ情報: ", JSON.stringify(userInfo))
+    refresh()
   }, [opened])
 
   return (
@@ -31,11 +30,11 @@ export const LoginTypeSelectPopup = ({opened ,close}: {
     closeOnClickOutside={true}  // モーダル外クリックの無効化
     closeOnEscape={true}  // ESCキーで閉じない
     >
-      {family ? <>
+      {userInfo?.family_id ? <>
       {/* 家族が取得できた場合 */}
         <div className="flex flex-col gap-2">
           {/* 家族名表示欄 */}
-          <Text>{family.local_name}</Text>
+          <Text>{userInfo.family_local_name}</Text>
           {/* 親ユーザログインボタン */}
           <Button variant="light">親でログイン</Button>
           {/* 子ユーザログインボタン */}

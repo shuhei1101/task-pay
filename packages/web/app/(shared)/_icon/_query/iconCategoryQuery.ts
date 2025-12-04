@@ -1,5 +1,5 @@
 import { IconCategoryEntitySchema } from "../_schema/iconCategorySchema"
-import { clientSupabase } from "@/app/(core)/_supabase/clientSupabase"
+import { clientSupabase } from "@/app/(core)/_supabase/client"
 
 /** 全てのアイコンカテゴリを取得する */
 export const fetchIconCategories = async () => {

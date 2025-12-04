@@ -1,45 +1,45 @@
 // "use client"
 // import { useRouter, useSearchParams } from "next/navigation"
-// import { createTaskFilterFromQueryObj, RawTask, TaskColumns, TaskFilterSchema } from "../_schema/taskSchema"
-// import { useTaskStatuses } from "../_hooks/useTaskStatuses"
+// import { createQuestFilterFromQueryObj, RawQuest, QuestColumns, QuestFilterSchema } from "../_schema/questSchema"
+// import { useQuestStatuses } from "../_hooks/useQuestStatuses"
 // import { DataTable, DataTableSortStatus } from "mantine-datatable"
 // import { useEffect, useState, Suspense } from "react"
-// import { useTasks } from "./_hooks/useTasks"
-// import { TaskFilter } from "./_components/TaskFilter"
-// import { TASKS_URL } from "../../(core)/appConstants"
+// import { useQuests } from "./_hooks/useQuests"
+// import { QuestFilter } from "./_components/QuestFilter"
+// import { QUESTS_URL } from "../../(core)/appConstants"
 // import { AuthorizedPageLayout } from "../../(auth)/_components/AuthorizedPageLayout"
 // import { Button, LoadingOverlay } from "@mantine/core"
 // import Link from "next/link"
-// import { getStatusName } from "../_schema/taskStatusSchema"
+// import { getStatusName } from "../_schema/questStatusSchema"
 // import { useLoginUserInfo } from "@/app/(auth)/_hooks/useLoginUserInfo"
 
-// function TasksContent() {
+// function QuestsContent() {
 //   const router = useRouter();
 
 //   /** ログインユーザ情報を取得する */
 //   const {isGuest, isAdmin} = useLoginUserInfo()
 
 //   /** タスクフィルター状態 */
-//   const [taskFilter, setTaskFilter] = useState<TaskFilterSchema>({})
+//   const [questFilter, setQuestFilter] = useState<QuestFilterSchema>({})
   
 //   /** 検索実行用フィルター状態 */
-//   const [searchFilter, setSearchFilter] = useState<TaskFilterSchema>({})
+//   const [searchFilter, setSearchFilter] = useState<QuestFilterSchema>({})
   
 //   /** クエリストリングの状態 */
 //   const searchParams = useSearchParams();
   
 //   // パラメータをタスクフィルターにセットする
 //   useEffect(() => {
-//     const queryObj: TaskFilterSchema = searchParams ? Object.fromEntries(searchParams.entries()): {}
-//     setTaskFilter(createTaskFilterFromQueryObj(queryObj))
+//     const queryObj: QuestFilterSchema = searchParams ? Object.fromEntries(searchParams.entries()): {}
+//     setQuestFilter(createQuestFilterFromQueryObj(queryObj))
 //   }, [searchParams])
 
 //   // タスクステータスマスタを取得する
-//   const { fetchedStatuses, isLoading: statusLoading } = useTaskStatuses()
+//   const { fetchedStatuses, isLoading: statusLoading } = useQuestStatuses()
   
 //   /** ソート状態 */
-//   const [sortStatus, setSortStatus] = useState<DataTableSortStatus<RawTask>>({
-//     columnAccessor: 'id' as TaskColumns,
+//   const [sortStatus, setSortStatus] = useState<DataTableSortStatus<RawQuest>>({
+//     columnAccessor: 'id' as QuestColumns,
 //     direction: 'asc',
 //   })
 
@@ -53,56 +53,56 @@
 //   }
   
 //   // タスク一覧を取得する
-//   const { fetchedTasks, isLoading: taskLoading, totalRecords } = useTasks({
+//   const { fetchedQuests, isLoading: questLoading, totalRecords } = useQuests({
 //     filter: searchFilter,
-//     sortColumn: sortStatus.columnAccessor as TaskColumns,
+//     sortColumn: sortStatus.columnAccessor as QuestColumns,
 //     sortOrder: sortStatus.direction,
 //     page,
 //     pageSize
 //   })
 
 //   /** 全体のロード状態 */
-//   const loading = statusLoading || taskLoading;
+//   const loading = statusLoading || questLoading;
 
 //   /** 検索ボタン押下時のハンドル */
 //   const handleSerch = () => {
 //     // タスクフィルターをクエリストリングに変換する
 //     const paramsObj = Object.fromEntries(
-//       Object.entries(taskFilter)
+//       Object.entries(questFilter)
 //         .filter(([_, v]) => v !== undefined && v !== null && v !== '')
 //         .map(([k, v]) => [k, String(v)])
 //     );
 //     const params = new URLSearchParams(paramsObj)
 
 //     // フィルターをURLに反映する
-//     router.push(`${TASKS_URL}?${params.toString()}`)
+//     router.push(`${QUESTS_URL}?${params.toString()}`)
 
 //     // 検索フィルターを更新し、一覧を更新する
-//     setSearchFilter(taskFilter)
+//     setSearchFilter(questFilter)
 //   }
 
 //   return (
 //     <AuthorizedPageLayout title="タスク一覧" actionButtons={(
 //       <Button hidden={isGuest} onClick={() => {
-//         router.push("/tasks/new")
+//         router.push("/quests/new")
 //       }}>新規作成</Button>
 //     )}>
 //       {/* 検索条件欄 */}
-//       <TaskFilter statuses={fetchedStatuses} filter={taskFilter} handleSearch={handleSerch} setFilter={setTaskFilter} 
+//       <QuestFilter statuses={fetchedStatuses} filter={questFilter} handleSearch={handleSerch} setFilter={setQuestFilter} 
 //        />
 //       <div className="m-5" />
 //       {/* タスク一覧テーブル */}
-//       <DataTable<RawTask> 
+//       <DataTable<RawQuest> 
 //         withTableBorder 
 //         highlightOnHover
 //         noRecordsText=""
 //         noRecordsIcon={<></>}
-//         records={fetchedTasks}
+//         records={fetchedQuests}
 //         columns={[
 //           { accessor: 'id', title: 'ID', sortable: true, resizable: true,
-//             render: (task) => {
-//             const url = `${TASKS_URL}/${task.id}`
-//             return (<Link href={url} className="text-blue-400">{task.id}</Link>)}
+//             render: (quest) => {
+//             const url = `${QUESTS_URL}/${quest.id}`
+//             return (<Link href={url} className="text-blue-400">{quest.id}</Link>)}
 //           },
 //           { accessor: 'name', title: 'タスク名', sortable: true, resizable: true },
 //           { accessor: 'detail', title: '詳細', sortable: true, resizable: true,
@@ -112,7 +112,7 @@
 //             }
 //            },
 //           { accessor: 'status_id', title: 'ステータス', sortable: true, resizable: true,
-//             render: (task) => getStatusName(fetchedStatuses, task.status_id)
+//             render: (quest) => getStatusName(fetchedStatuses, quest.status_id)
 //           }
 //         ]}
 //         sortStatus={sortStatus}
@@ -129,7 +129,7 @@
 // export default function Page() {
 //   return (
 //     <Suspense fallback={<div></div>}>
-//       <TasksContent />
+//       <QuestsContent />
 //     </Suspense>
 //   )
 // }

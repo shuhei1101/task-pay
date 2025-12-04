@@ -1,6 +1,6 @@
 import { handleAPIError } from "@/app/(core)/errorHandler";
 import { UserFormSchema } from "../_schema/profileEntity";
-import { USER_API_URL } from "@/app/(core)/appConstants";
+import { USER_API_URL } from "@/app/(core)/constants";
 import { RegisterUserResponse } from "../users/[id]/api/route";
 
 export const userApi = {

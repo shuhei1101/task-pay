@@ -1,12 +1,15 @@
 import { z } from "zod"
-import { SortOrder } from "@/app/(core)/appSchema"
+import { SortOrder } from "@/app/(core)/schema"
 import { ChildColumns, ChildEntity, ChildEntitySchema } from "../_schema/childEntity"
-import { clientSupabase } from "@/app/(core)/_supabase/clientSupabase"
+import { SupabaseClient } from "@supabase/supabase-js"
 
 /** IDに紐づく子供を取得する */
-export const fetchChild = async (userId: string) => {
+export const fetchChild = async ({userId, supabase}:{
+  userId: string,
+  supabase: SupabaseClient
+}) => {
   // データを取得する
-  const { data, error } = await clientSupabase.from("children")
+  const { data, error } = await supabase.from("children")
     .select('*')
     .eq("user_id", userId)
 
@@ -21,15 +24,17 @@ export const fetchChildren = async ({
   sortColumn,
   sortOrder,
   page,
-  pageSize
+  pageSize,
+  supabase
 }: {
   sortColumn: ChildColumns,
   sortOrder: SortOrder,
   page: number,
-  pageSize: number
+  pageSize: number,
+  supabase: SupabaseClient
 }) => {
   // データを取得する
-  let query = clientSupabase.from("children")
+  let query = supabase.from("children")
     .select(`
         *,
         child_tags(*)

@@ -1,12 +1,11 @@
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { userFormSchema, UserFormSchema } from "../../(user)/_schema/profileEntity"
 
 /** ユーザフォームを取得する */
-export const useUserForm = () => {
+export const useProfileForm = () => {
 
   /** ユーザフォームのデフォルト値 */
-  const defaultUser: UserFormSchema = {
+  const defaultUser: ProfileFormSchema = {
     name: "",
     user_id: undefined,
     created_at: undefined,
@@ -21,7 +20,7 @@ export const useUserForm = () => {
     setValue,
     watch,
     reset,
-  } = useForm<UserFormSchema>({
+  } = useForm<ProfileFormSchema>({
     resolver: zodResolver(userFormSchema),
     defaultValues: defaultUser
   })

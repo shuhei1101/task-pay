@@ -2,7 +2,7 @@
 import { AuthorizedPageLayout } from "@/app/(auth)/_components/AuthorizedPageLayout";
 import { Box, Button, Group, Input, LoadingOverlay, Space } from "@mantine/core";
 import { FormBackButton } from "@/app/(shared)/_components/FormBackButton";
-import { USERS_URL } from "@/app/(core)/appConstants";
+import { USERS_URL } from "@/app/(core)/constants";
 import { useUserDelete } from "../_hooks/useUserDelete";
 import { useUserUpdate } from "../_hooks/useUserUpdate";
 import { useUserForm } from "../_hooks/useUserForm";

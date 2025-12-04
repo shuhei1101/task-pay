@@ -5,7 +5,7 @@ import { userApi } from "../../../_api-client/userApi"
 import { UserFormSchema } from "../../../_schema/profileEntity"
 import { handleAppError } from "@/app/(core)/errorHandler"
 import { appStorage } from "@/app/(core)/_sessionStorage/appStorage"
-import { USERS_URL } from "@/app/(core)/appConstants"
+import { USERS_URL } from "@/app/(core)/constants"
 
 /** 更新ボタン押下時のハンドル */
 export const useUserUpdate = () => {

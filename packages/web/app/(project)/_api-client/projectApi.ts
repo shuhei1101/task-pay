@@ -1,7 +1,7 @@
 import { handleAPIError } from "@/app/(core)/errorHandler";
 import { ProjectFormSchema } from "../_schema/projectSchema";
 import { RegisterProjectResponse } from "../projects/api/route";
-import { PROJECT_API_URL } from "@/app/(core)/appConstants";
+import { PROJECT_API_URL } from "@/app/(core)/constants";
 
 export const projectApi = {
   /** プロジェクトを作成する */

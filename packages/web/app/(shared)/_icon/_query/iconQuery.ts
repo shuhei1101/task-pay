@@ -1,5 +1,5 @@
 import { IconEntitySchema, IconEntityWithCategoriesSchema } from "../_schema/iconSchema"
-import { clientSupabase } from "@/app/(core)/_supabase/clientSupabase"
+import { clientSupabase } from "@/app/(core)/_supabase/client"
 
 /** 全てのアイコンを取得する */
 export const fetchIcons = async () => {

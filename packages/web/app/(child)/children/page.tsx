@@ -3,7 +3,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { ChildEntity, ChildColumns } from "../_schema/childEntity"
 import { DataTable, DataTableSortStatus } from "mantine-datatable"
 import { useEffect, useState, Suspense } from "react"
-import { TASKS_URL } from "../../(core)/appConstants"
+import { QUESTS_URL } from "../../(core)/constants"
 import { AuthorizedPageLayout } from "../../(auth)/_components/AuthorizedPageLayout"
 import { Button } from "@mantine/core"
 import Link from "next/link"
@@ -52,7 +52,7 @@ function ChildrenContent() {
         columns={[
           { accessor: 'id', title: 'ID', sortable: true, resizable: true,
             render: (child) => {
-            const url = `${TASKS_URL}/${child.user_id}`
+            const url = `${QUESTS_URL}/${child.user_id}`
             return (<Link href={url} className="text-blue-400">{child.user_id}</Link>)}
           },
           { accessor: 'name', title: '子供名', sortable: true, resizable: true },

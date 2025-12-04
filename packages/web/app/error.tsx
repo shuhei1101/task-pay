@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { appStorage } from "./(core)/_sessionStorage/appStorage"
 import { Button } from "@mantine/core"
 import { useRouter } from "next/navigation"
-import { HOME_URL } from "./(core)/appConstants"
+import { HOME_URL } from "./(core)/constants"
 import { AuthorizedPageLayout } from "./(auth)/_components/AuthorizedPageLayout"
 
 export default function ErrorPage({

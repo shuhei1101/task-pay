@@ -1,16 +1,16 @@
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import useSWR from "swr"
-import { fetchTask } from "../../../_query/taskQuery"
+import { fetchQuest } from "../../../_query/questQuery"
 import { useEffect, useState } from "react"
-import { TaskFormSchema, TaskFormType } from "../_schema/childFormSchema"
+import { QuestFormSchema, QuestFormType } from "../_schema/childFormSchema"
 import { isSameArray } from "@/app/(shared)/util"
 
 /** タスクフォームを取得する */
-export const useTaskForm = ({id}: {id: number}) => {
+export const useQuestForm = ({id}: {id: number}) => {
 
   /** タスクフォームのデフォルト値 */
-  const defaultTask: TaskFormType = {
+  const defaultQuest: QuestFormType = {
     name: "",
     icon: "",
     tags: [],
@@ -24,45 +24,45 @@ export const useTaskForm = ({id}: {id: number}) => {
     setValue,
     watch,
     reset,
-  } = useForm<TaskFormType>({
-    resolver: zodResolver(TaskFormSchema),
-    defaultValues: defaultTask
+  } = useForm<QuestFormType>({
+    resolver: zodResolver(QuestFormSchema),
+    defaultValues: defaultQuest
   })
 
   // IDに紐づくタスクを取得する
-  const { data: taskEntity, error, mutate, isLoading } = useSWR(
+  const { data: questEntity, error, mutate, isLoading } = useSWR(
     id ? ["タスク", id] : null,
-    () => fetchTask(id)
+    () => fetchQuest(id)
   )
 
   // エラーをチェックする
   if (error) throw error
 
   /** 取得時のタスクデータ */
-  const [fetchedTask, setFetchedTask] = useState(defaultTask)
+  const [fetchedQuest, setFetchedQuest] = useState(defaultQuest)
 
   // タスクを取得できた場合、状態にセットする
   useEffect(() => {
-    if (taskEntity != null) {
+    if (questEntity != null) {
       // タスクフォームに変換する
-      const fetchedTaskForm: TaskFormType = {
-        name: taskEntity.name,
-        icon: taskEntity.icon,
-        tags: taskEntity.task_tags.map((t) => t.name),
+      const fetchedQuestForm: QuestFormType = {
+        name: questEntity.name,
+        icon: questEntity.icon,
+        tags: questEntity.quest_tags.map((t) => t.name),
       }
-      setFetchedTask(fetchedTaskForm)
-      reset(fetchedTaskForm)
+      setFetchedQuest(fetchedQuestForm)
+      reset(fetchedQuestForm)
     }
-  }, [taskEntity])
+  }, [questEntity])
 
   /** 現在の入力データ */
-  const currentTasks = watch()
+  const currentQuests = watch()
 
   /** 値を変更したかどうか */
   const isValueChanged = 
-    currentTasks.name !== fetchedTask.name ||
-    currentTasks.icon !== fetchedTask.icon ||
-    !isSameArray(currentTasks.tags, fetchedTask.tags)
+    currentQuests.name !== fetchedQuest.name ||
+    currentQuests.icon !== fetchedQuest.icon ||
+    !isSameArray(currentQuests.tags, fetchedQuest.tags)
 
   return {
     register,
@@ -72,9 +72,9 @@ export const useTaskForm = ({id}: {id: number}) => {
     isValueChanged,
     setForm: reset,
     handleSubmit,
-    fetchedTask,
+    fetchedQuest,
     refresh: mutate,
     isLoading,
-    entity: taskEntity
+    entity: questEntity
   }
 }

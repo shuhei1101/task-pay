@@ -1,27 +1,27 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { taskApi } from "../../../_api-client/taskApi"
+import { questApi } from "../../../_api-client/questApi"
 import { handleAppError } from "@/app/(core)/errorHandler"
 import { appStorage } from "@/app/(core)/_sessionStorage/appStorage"
-import { TASKS_URL } from "@/app/(core)/appConstants"
-import { UpdateTaskRequest } from "../../api/schema"
+import { QUESTS_URL } from "@/app/(core)/constants"
+import { UpdateQuestRequest } from "../../api/schema"
 
 /** 更新ボタン押下時のハンドル */
-export const useTaskUpdate = () => {
+export const useQuestUpdate = () => {
   const router = useRouter()
-  const handleUpdate = async (request: UpdateTaskRequest) => {
+  const handleUpdate = async (request: UpdateQuestRequest) => {
     try {
       // 更新確認を行う
       if (window.confirm('更新します。よろしいですか？')) {
         // タスクを更新する
-        await taskApi.update(request)
+        await questApi.update(request)
         
         // 次画面で表示するメッセージを登録する
         appStorage.feedbackMessage.set('タスクを更新しました')
 
         // タスク一覧画面に戻る
-        router.push(`${TASKS_URL}`)
+        router.push(`${QUESTS_URL}`)
       }
     } catch (error) {
       handleAppError(error, router)

@@ -1,19 +1,19 @@
 import { DatabaseError } from "@/app/(core)/appError"
-import { taskExclusiveControl } from "./taskExclusiveControl"
-import { TaskDelete, TaskInsert, TaskUpdate } from "../_schema/taskEntity"
+import { questExclusiveControl } from "./questExclusiveControl"
+import { QuestDelete, QuestInsert, QuestUpdate } from "../_schema/questEntity"
 import { serverSupabase } from "@/app/(core)/_supabase/serverSupabase"
 
-export const taskDao = {
+export const questDao = {
   /** タスクを挿入する */
-  insert: async ({task, tags}: {
-    task: TaskInsert,
+  insert: async ({quest, tags}: {
+    quest: QuestInsert,
     tags: string[]
   }) => {
     // レコードを挿入する
-    const { error } = await serverSupabase.rpc("insert_task", {
-      _name: task.name,
-      _type: task.type,
-      _icon: task.icon,
+    const { error } = await serverSupabase.rpc("insert_quest", {
+      _name: quest.name,
+      _type: quest.type,
+      _icon: quest.icon,
       _tags: tags
     })
     
@@ -25,25 +25,25 @@ export const taskDao = {
   },
 
   /** タスクを更新する */
-  update: async ({task, tags}: {
-    task: TaskUpdate,
+  update: async ({quest, tags}: {
+    quest: QuestUpdate,
     tags: string[]
   }) => {
     // 存在をチェックする
-    const beforeTask = await taskExclusiveControl.existsCheck(task.id)
+    const beforeQuest = await questExclusiveControl.existsCheck(quest.id)
     
     // 更新日時による排他制御を行う
-    taskExclusiveControl.hasAlreadyUpdated({
-      beforeDate: beforeTask.updated_at, 
-      afterDate: task.updated_at
+    questExclusiveControl.hasAlreadyUpdated({
+      beforeDate: beforeQuest.updated_at, 
+      afterDate: quest.updated_at
     })
     
     // タスクを更新する
-    const {error} = await serverSupabase.rpc('update_task', {
-      _task_id: task.id,
-      _name: task.name,
-      _type: task.type,
-      _icon: task.icon,
+    const {error} = await serverSupabase.rpc('update_quest', {
+      _quest_id: quest.id,
+      _name: quest.name,
+      _type: quest.type,
+      _icon: quest.icon,
       _tags: tags
     })
 
@@ -55,18 +55,18 @@ export const taskDao = {
   },
 
   /** タスクを削除する */
-  delete: async (task: TaskDelete) => {
+  delete: async (quest: QuestDelete) => {
     // 存在をチェックする
-    const beforeTask = await taskExclusiveControl.existsCheck(task.id)
+    const beforeQuest = await questExclusiveControl.existsCheck(quest.id)
     
     // 更新日時による排他制御を行う
-    taskExclusiveControl.hasAlreadyUpdated({
-      beforeDate: beforeTask.updated_at, 
-      afterDate: task.updated_at
+    questExclusiveControl.hasAlreadyUpdated({
+      beforeDate: beforeQuest.updated_at, 
+      afterDate: quest.updated_at
     })
     
-    const { error } = await serverSupabase.rpc('delete_task', {
-      _task_id: task.id
+    const { error } = await serverSupabase.rpc('delete_quest', {
+      _quest_id: quest.id
     })
 
     // エラーをチェックする

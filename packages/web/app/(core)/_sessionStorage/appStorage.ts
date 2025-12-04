@@ -1,6 +1,7 @@
 import { IconCategoryEntity, IconCategoryEntitySchema } from "@/app/(shared)/_icon/_schema/iconCategorySchema"
 import { IconEntityWithCategoriesEntity, IconEntityWithCategoriesSchema } from "@/app/(shared)/_icon/_schema/iconSchema"
 import { ProfileEntity } from "@/app/(user)/_schema/profileEntity"
+import { UserInfoView } from "@/app/(user)/schema"
 import toast from "react-hot-toast"
 
 export const appStorage = {
@@ -46,9 +47,9 @@ export const appStorage = {
   user: {
     get: () => {
       const cached = sessionStorage.getItem("user")
-      return cached ? JSON.parse(cached) as ProfileEntity : undefined
+      return cached ? JSON.parse(cached) as UserInfoView : undefined
     },
-    set: (data: ProfileEntity) => sessionStorage.setItem("user", JSON.stringify(data))
+    set: (data: UserInfoView) => sessionStorage.setItem("user", JSON.stringify(data))
   },
   // アイコン情報
   icons: {

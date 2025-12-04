@@ -1,8 +1,8 @@
 "use client"
-import { clientSupabase } from "@/app/(core)/_supabase/clientSupabase";
+import { clientSupabase } from "@/app/(core)/_supabase/client";
 import { appStorage } from "../../(core)/_sessionStorage/appStorage";
 import { useRouter } from "next/navigation";
-import { LOGIN_URL } from "@/app/(core)/appConstants";
+import { LOGIN_URL } from "@/app/(core)/constants";
 
 /** サインアウト時の処理 */
 export const useSignOut = () => {

@@ -1,13 +1,13 @@
 'use client'
 import { Combobox, Input, InputBase, useCombobox } from "@mantine/core"
-import { getStatusName, RawTaskStatus } from "../../../_schema/taskStatusSchema"
+import { getStatusName, RawQuestStatus } from "../../../_schema/questStatusSchema"
 
 
 /** タスクステータスコンボボックス */
-export const TaskStatusCombobox = ({ onChanged, currentValue, taskStatuses }: {
+export const QuestStatusCombobox = ({ onChanged, currentValue, questStatuses }: {
   onChanged: (val: number | undefined) => void
   currentValue: number | undefined
-  taskStatuses: RawTaskStatus[]
+  questStatuses: RawQuestStatus[]
 }) => {
 
   // コンボボックスの選択肢を初期化する
@@ -15,7 +15,7 @@ export const TaskStatusCombobox = ({ onChanged, currentValue, taskStatuses }: {
     <Combobox.Option value={"-1"} key={-1}>
       -
     </Combobox.Option>,
-    taskStatuses.map((item) => (
+    questStatuses.map((item) => (
       <Combobox.Option value={item.id.toString()} key={item.id}>
         {item.name}
       </Combobox.Option>
@@ -48,7 +48,7 @@ export const TaskStatusCombobox = ({ onChanged, currentValue, taskStatuses }: {
           pointer rightSection={<Combobox.Chevron />} rightSectionPointerEvents="none"
           onClick={() => combobox.toggleDropdown()} className="min-w-30 max-w-50"
         >
-          {getStatusName(taskStatuses, currentValue) || <Input.Placeholder>-</Input.Placeholder>}
+          {getStatusName(questStatuses, currentValue) || <Input.Placeholder>-</Input.Placeholder>}
         </InputBase>
       </Combobox.Target>
 

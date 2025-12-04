@@ -11,7 +11,7 @@ import { ProjectMemberTable } from "./ProjectMemberTable";
 import { UserSelectPopup } from "@/app/(user)/users/_components/UserSelectPopup";
 import { useDisclosure } from "@mantine/hooks";
 import { ProfileEntitySchema } from "@/app/(user)/_schema/profileEntity";
-import { PROJECTS_URL } from "@/app/(core)/appConstants";
+import { PROJECTS_URL } from "@/app/(core)/constants";
 import { useLoginUserInfo } from "@/app/(auth)/_hooks/useLoginUserInfo";
 
 /** プロジェクトフォーム */

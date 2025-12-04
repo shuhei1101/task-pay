@@ -1,10 +1,10 @@
 import { DatabaseError } from "@/app/(core)/appError";
-import { fetchTask } from "../_query/taskQuery";
+import { fetchQuest } from "../_query/questQuery";
 
-export const taskExclusiveControl = {
+export const questExclusiveControl = {
   /** 既に存在するかどうかを確認する */
   existsCheck: async (id: number) => {
-    const record = await fetchTask(id)
+    const record = await fetchQuest(id)
     if (!record) throw new DatabaseError("既に削除されたタスクです。")
     return record
   },

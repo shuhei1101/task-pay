@@ -1,9 +1,9 @@
 "use client"
 
 import { LoginFormSchema } from "../_schema/loginSchema"
-import { clientSupabase } from "@/app/(core)/_supabase/clientSupabase"
 import toast from "react-hot-toast"
 import { useState } from "react"
+import { createClient } from "@/app/(core)/_supabase/client"
 
 /** ログイン時のハンドル */
 export const useLogin = () => {
@@ -14,7 +14,7 @@ export const useLogin = () => {
   }) => {
 
     // ログインする
-    const { data, error } = await clientSupabase.auth.signInWithPassword({
+    const { data, error } = await createClient().auth.signInWithPassword({
       email: form.email,
       password: form.password
     })

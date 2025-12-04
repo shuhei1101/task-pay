@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { createUserSchemaFromEntity, ProfileEntitySchema, UserFormSchema, userFormSchema } from "../../../_schema/profileEntity"
 import useSWR from "swr"
-import { fetchProfile } from "../../../_query/profileQuery"
+import { fetchProfile } from "../../../query"
 import { useEffect, useState } from "react"
 
 /** ユーザフォームを取得する */

@@ -1,7 +1,7 @@
 "use client"
 
 import useSWR from "swr"
-import { fetchUserTypes } from "../_query/profileQuery"
+import { fetchUserTypes } from "../query"
 
 /** ユーザタイプを取得する */
 export const useUserTypes = () => {

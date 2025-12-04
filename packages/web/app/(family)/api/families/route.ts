@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { FamilyDelete, FamilyDeleteSchema, FamilyUpdate, FamilyUpdateSchema } from "../../_schema/familyEntity"
 import { handleServerError } from "@/app/(core)/errorHandler"
-import { familyDao } from "../_data-access/familyDao"
+import { familyDao } from "../../db"
 import { FamilyCreateRequestSchema } from "./schema"
 
 /** 家族を登録する */

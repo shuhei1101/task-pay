@@ -1,5 +1,5 @@
 import { DatabaseError } from "@/app/(core)/appError";
-import { fetchProfile } from "../_query/profileQuery";
+import { fetchProfile } from "../query";
 
 export const userExclusiveControl = {
   /** 既に存在するかどうかを確認する */

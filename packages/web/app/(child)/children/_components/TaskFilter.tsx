@@ -1,12 +1,12 @@
 "use client"
 
-import { TaskFilterType } from "@/app/(task)/tasks/_schema/taskFilterSchema"
+import { QuestFilterType } from "@/app/(quest)/quests/_schema/questFilterSchema"
 import { Accordion, Button, Input, Pill, PillsInput } from "@mantine/core"
 import { Dispatch, SetStateAction, useState } from "react"
 
-export const TaskFilter = ({filter, setFilter, handleSearch}: {
-  filter: TaskFilterType,
-  setFilter: Dispatch<SetStateAction<TaskFilterType>> ,
+export const QuestFilter = ({filter, setFilter, handleSearch}: {
+  filter: QuestFilterType,
+  setFilter: Dispatch<SetStateAction<QuestFilterType>> ,
   handleSearch: () => void
 }) => {
 

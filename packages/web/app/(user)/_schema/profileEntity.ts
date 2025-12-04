@@ -1,10 +1,11 @@
 import { ChildEntitySchema } from "@/app/(child)/_schema/childEntity"
 import { FamilyEntitySchema } from "@/app/(family)/_schema/familyEntity"
-import { ParentEntitySchema } from "@/app/(parent)/_schema/parentEntity"
+import { ParentEntitySchema } from "@/app/(parent)/entity"
 import { z } from "zod"
 
 /** DBのユーザスキーマ */
 export const ProfileEntitySchema = z.object({
+  id: z.number(),
   user_id: z.string(),
   name: z.string(),
   icon: z.string(),
@@ -31,6 +32,7 @@ export const Birthday = z.string().nonempty({error: "誕生日は必須です。
   message: "有効な日付文字列ではありません",
 })
 
+// ユーザ取得バンドル（ビューに切り替え予定）
 export const UserBundleSchema = ProfileEntitySchema.extend({
   parents: z.array(ParentEntitySchema.extend({
     families: z.array(FamilyEntitySchema)

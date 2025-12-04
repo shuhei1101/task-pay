@@ -1,12 +1,12 @@
 'use client';
 import { AuthorizedPageLayout } from "@/app/(auth)/_components/AuthorizedPageLayout";
 import { ActionIcon, Box, Button, Checkbox, Group, Input, LoadingOverlay, Pill, PillsInput, Space, Textarea} from "@mantine/core";
-import { useTaskForm } from "../_hooks/useTaskForm";
+import { useQuestForm } from "../_hooks/useQuestForm";
 import { FormBackButton } from "@/app/(shared)/_components/FormBackButton";
-import { useTaskDelete } from "../_hooks/useTaskDelete";
-import { useTaskSave } from "../_hooks/useTaskSave";
-import { useTaskUpdate } from "../_hooks/useTaskUpdate";
-import { TASKS_URL } from "@/app/(core)/appConstants";
+import { useQuestDelete } from "../_hooks/useQuestDelete";
+import { useQuestSave } from "../_hooks/useQuestSave";
+import { useQuestUpdate } from "../_hooks/useQuestUpdate";
+import { QUESTS_URL } from "@/app/(core)/constants";
 import { useLoginUserInfo } from "@/app/(auth)/_hooks/useLoginUserInfo";
 import { IconSelectPopup } from "@/app/(shared)/_icon/IconSelectPopup";
 import { useDisclosure } from "@mantine/hooks";
@@ -14,7 +14,7 @@ import { RenderIcon } from "@/app/(shared)/_icon/_components/RenderIcon";
 import { useState } from "react";
 
 /** タスクフォーム */
-export const TaskForm = ( params: {
+export const QuestForm = ( params: {
   /** タスクID */
   id?: string;
 }) => {
@@ -25,9 +25,9 @@ export const TaskForm = ( params: {
   const [popupOpened, { open: openPopup, close: closePopup }] = useDisclosure(false)
 
   /** ハンドラ */
-  const { handleDelete } = useTaskDelete()
-  const { handleSave } = useTaskSave()
-  const { handleUpdate } = useTaskUpdate()
+  const { handleDelete } = useQuestDelete()
+  const { handleSave } = useQuestSave()
+  const { handleUpdate } = useQuestUpdate()
 
   /** 新規登録フラグ */
   const isNew = !params.id || params.id === "";
@@ -35,9 +35,9 @@ export const TaskForm = ( params: {
   const id = params.id ? Number(params.id) : 0;
   
   // タスクフォームを取得する
-  const { register: taskRegister, errors, setValue: setTaskValue, watch: watchTask, isValueChanged, handleSubmit, isLoading: taskLoading, fetchedTask, entity } = useTaskForm({id});
+  const { register: questRegister, errors, setValue: setQuestValue, watch: watchQuest, isValueChanged, handleSubmit, isLoading: questLoading, fetchedQuest, entity } = useQuestForm({id});
   /** 全体のロード状態 */
-  const loading = taskLoading;
+  const loading = questLoading;
  
   /** タグ入力状態 */
   const [tagInputValue, setTagInputValue] = useState("")
@@ -46,9 +46,9 @@ export const TaskForm = ( params: {
   const handleTag = () => {
     const newTag = tagInputValue.trim()
     // タグが空白もしくは既に登録済みの場合、処理を終了する
-    if (newTag && !watchTask().tags.includes(newTag)) {
+    if (newTag && !watchQuest().tags.includes(newTag)) {
       // タグを追加する
-      setTaskValue("tags", [...watchTask().tags, newTag])
+      setQuestValue("tags", [...watchQuest().tags, newTag])
     }
     // タグ入力状態を初期化する
     setTagInputValue("")
@@ -60,20 +60,20 @@ export const TaskForm = ( params: {
   return (
     <>
       <AuthorizedPageLayout title={isNew ? "タスク作成": "タスク編集"} 
-      actionButtons={<FormBackButton isValueChanged={isValueChanged} previousScreenURL={TASKS_URL} />}>
+      actionButtons={<FormBackButton isValueChanged={isValueChanged} previousScreenURL={QUESTS_URL} />}>
         <div>
 
         <Box pos="relative" className="max-w-120">
           {/* ロード中のオーバーレイ */}
           <LoadingOverlay visible={loading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2, }} />
           {/* タスク入力フォーム */}
-          <form onSubmit={handleSubmit((form) => isNew ? handleSave({form, user_id: userInfo!.user_id}) : handleUpdate({form, task_id: id, user_id: userInfo!.user_id, updated_at: entity!.updated_at}))}>
+          <form onSubmit={handleSubmit((form) => isNew ? handleSave({form, user_id: userInfo!.user_id}) : handleUpdate({form, quest_id: id, user_id: userInfo!.user_id, updated_at: entity!.updated_at}))}>
             {/* 入力欄のコンテナ */}
             <div className="flex flex-col gap-2">
               {/* タスク名入力 */}
               <div>
                 <Input.Wrapper label="タスク名" required error={errors.name?.message}>
-                  <Input className="max-w-120" {...taskRegister("name")} />
+                  <Input className="max-w-120" {...questRegister("name")} />
                 </Input.Wrapper>
               </div>
               {/* 親アイコン選択 */}
@@ -82,7 +82,7 @@ export const TaskForm = ( params: {
                   <div>
                     <ActionIcon variant="outline" radius="xl"
                       onClick={ () => openPopup() }>
-                      <RenderIcon iconName={watchTask().icon} />
+                      <RenderIcon iconName={watchQuest().icon} />
                     </ActionIcon>
                   </div>
                 </Input.Wrapper>
@@ -93,10 +93,10 @@ export const TaskForm = ( params: {
                 description={"条件絞り込みで使用"}
                 error={errors.tags?.message}>
                   <Pill.Group>
-                    {watchTask().tags.map((tag) => (
+                    {watchQuest().tags.map((tag) => (
                       <Pill key={tag} withRemoveButton
                         onRemove={() => {
-                          setTaskValue("tags", watchTask().tags.filter((t) => t !== tag))
+                          setQuestValue("tags", watchQuest().tags.filter((t) => t !== tag))
                         }}
                       >{tag}</Pill>
                     ))}
@@ -132,7 +132,7 @@ export const TaskForm = ( params: {
           </form>
         </Box>
         </div>
-        <IconSelectPopup opened={ popupOpened } close={ closePopup } setIcon={ (icon) => setTaskValue("icon", icon) } />
+        <IconSelectPopup opened={ popupOpened } close={ closePopup } setIcon={ (icon) => setQuestValue("icon", icon) } />
       </AuthorizedPageLayout>
     </>
   )

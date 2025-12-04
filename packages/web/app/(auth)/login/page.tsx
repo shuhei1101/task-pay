@@ -54,7 +54,7 @@ export default function Page() {
           <Center p="md" className="flex flex-col gap-5">
             {/* タイトル */}
             <Title order={1} c={"white"}>タスクペイ</Title>
-            <form onSubmit={handleSubmit((form) => isLogin ? handleLogin({form, onSuccess: () => openPopup()}) : handleSignUp(form))}>
+            <form method="POST" onSubmit={handleSubmit((form) => isLogin ? handleLogin({form, onSuccess: () => openPopup()}) : handleSignUp(form))}>
               {/* タブ */}
               <Tabs defaultValue="ログイン" variant="outline">
                 <Tabs.List>

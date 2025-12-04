@@ -4,7 +4,7 @@ import { createProjectFilterFromQueryObj, ProjectColumns, ProjectFilterSchema } 
 import { DataTable, DataTableSortStatus } from "mantine-datatable"
 import { useEffect, useState, Suspense } from "react"
 import { ProjectFilter } from "./_components/ProjectFilter"
-import { PROJECT_NEW_URL, PROJECTS_URL } from "../../(core)/appConstants"
+import { PROJECT_NEW_URL, PROJECTS_URL } from "../../(core)/constants"
 import { AuthorizedPageLayout } from "../../(auth)/_components/AuthorizedPageLayout"
 import { Button } from "@mantine/core"
 import Link from "next/link"

@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation"
 import { handleAppError } from "@/app/(core)/errorHandler"
 import { appStorage } from "@/app/(core)/_sessionStorage/appStorage"
-import { USERS_URL } from "@/app/(core)/appConstants"
+import { USERS_URL } from "@/app/(core)/constants"
 import { UserFormSchema } from "@/app/(user)/_schema/profileEntity"
 import { userApi } from "@/app/(user)/_api-client/userApi"
 

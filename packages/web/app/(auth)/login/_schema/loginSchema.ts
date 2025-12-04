@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 /** ログインフォームスキーマ */
-export const loginFormSchema = z.object({
+export const LoginFormSchema = z.object({
   /** メールアドレス */
   email: z.string().nonempty({error: "メールアドレスは必須です。"}),
   /** パスワード */
@@ -9,4 +9,4 @@ export const loginFormSchema = z.object({
 })
 
 /** ログインフォームスキーマの型 */
-export type LoginFormSchema = z.infer<typeof loginFormSchema>;
+export type LoginFormType = z.infer<typeof LoginFormSchema>;

@@ -3,7 +3,7 @@
 import useSWR from "swr"
 import { ProjectColumns, ProjectFilterSchema } from "../../_schema/projectSchema"
 import { fetchProjects } from "../../_query/projectQuery"
-import { SortOrder } from "@/app/(core)/appSchema"
+import { SortOrder } from "@/app/(core)/schema"
 
 /** プロジェクトリストを取得する */
 export const useProjects = ({filter, sortColumn, sortOrder, page, pageSize}:{

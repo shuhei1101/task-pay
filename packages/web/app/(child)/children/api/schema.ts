@@ -1,17 +1,15 @@
-import { TaskFormSchema } from "@/app/(task)/tasks/[id]/_schema/taskFormSchema"
+import { QuestFormSchema } from "@/app/(quest)/quests/[id]/schema"
 import { z } from "zod"
 
-/** タスク登録リクエストスキーマ */
-export const RegisterTaskRequestSchema = z.object({
+/** クエスト登録リクエストスキーマ */
+export const RegisterQuestRequestSchema = z.object({
   user_id: z.string(),
-  form: TaskFormSchema,
+  form: QuestFormSchema,
 })
-export type RegisterTaskRequest = z.infer<typeof RegisterTaskRequestSchema>
-/** タスク更新リクエストスキーマ */
-export const UpdateTaskRequestSchema = z.object({
-  user_id: z.string(),
-  task_id: z.number(),
-  form: TaskFormSchema,
+export type RegisterQuestRequest = z.infer<typeof RegisterQuestRequestSchema>
+
+/** クエスト削除リクエストスキーマ */
+export const DeleteQuestRequestSchema = z.object({
   updated_at: z.string(),
 })
-export type UpdateTaskRequest = z.infer<typeof UpdateTaskRequestSchema>
+export type DeleteQuestRequest = z.infer<typeof DeleteQuestRequestSchema>

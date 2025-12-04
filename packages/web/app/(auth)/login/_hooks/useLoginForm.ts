@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { LoginFormSchema, loginFormSchema } from "../_schema/loginSchema"
+import { LoginFormSchema, LoginFormType } from "../_schema/loginSchema"
 
 /** ログインフォームを取得する */
 export const useLoginForm = () => {
 
   /** ログインフォームのデフォルト値 */
-  const defaultForm: LoginFormSchema = {
+  const defaultForm: LoginFormType = {
     email: "",
     password: "",
   }
@@ -19,18 +19,18 @@ export const useLoginForm = () => {
     setValue,
     watch,
     reset,
-  } = useForm<LoginFormSchema>({
-    resolver: zodResolver(loginFormSchema),
+  } = useForm<LoginFormType>({
+    resolver: zodResolver(LoginFormSchema),
     defaultValues: defaultForm
   })
 
   /** 現在の入力データ */
-  const currentTasks = watch()
+  const currentQuests = watch()
 
   /** 値を変更したかどうか */
   const isValueChanged = 
-    currentTasks.email !== defaultForm.email ||
-    currentTasks.password !== defaultForm.password
+    currentQuests.email !== defaultForm.email ||
+    currentQuests.password !== defaultForm.password
 
   return {
     register,

@@ -1,5 +1,5 @@
 import { ProfileEntitySchema } from "@/app/(user)/_schema/profileEntity";
-import { clientSupabase } from "@/app/(core)/_supabase/clientSupabase";
+import { clientSupabase } from "@/app/(core)/_supabase/client";
 
 /** プロジェクトIDに紐づくプロジェクトメンバーIDを取得する */
 export const fetchProjectMemberIds = async (project_id: number) => {

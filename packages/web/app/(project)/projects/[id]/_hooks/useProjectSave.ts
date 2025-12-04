@@ -5,7 +5,7 @@ import { projectApi } from "../../../_api-client/projectApi"
 import { ProjectFormSchema } from "../../../_schema/projectSchema"
 import { appStorage } from "@/app/(core)/_sessionStorage/appStorage"
 import { handleAppError } from "@/app/(core)/errorHandler"
-import { PROJECTS_URL } from "@/app/(core)/appConstants"
+import { PROJECTS_URL } from "@/app/(core)/constants"
 
 /** 新規作成ボタン押下時のハンドル */
 export const useProjectSave = () => {
