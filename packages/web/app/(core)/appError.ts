@@ -14,11 +14,19 @@ export class AppError extends Error {
   }
 }
 
+/** クライアントエラー */
+export const CLIENT_VALUE_ERROR_CODE = 'CLIENT_ERROR'
+export class ClientValueError extends AppError {
+  constructor(message = '不正な値が入力されました。') {
+    super(CLIENT_VALUE_ERROR_CODE, 0, message);
+  }
+}
+
 /** クライアント認証エラー */
 export const CLIENT_AUTH_ERROR_CODE = 'CLIENT_AUTH_ERROR'
 export class ClientAuthError extends AppError {
   constructor(message = 'ログイン状態が無効です。') {
-    super(CLIENT_AUTH_ERROR_CODE, 401, message);
+    super(CLIENT_AUTH_ERROR_CODE, 0, message);
   }
 }
 

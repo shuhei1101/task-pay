@@ -1,10 +1,10 @@
+import { createClient } from "../../_supabase/client"
 import { IconEntitySchema, IconEntityWithCategoriesSchema } from "../_schema/iconSchema"
-import { clientSupabase } from "@/app/(core)/_supabase/client"
 
 /** 全てのアイコンを取得する */
 export const fetchIcons = async () => {
   // データを取得する
-  const { data, error } = await clientSupabase.from("icons")
+  const { data, error } = await createClient().from("icons")
       .select(`
         *,
         icon_categories (*)
@@ -19,7 +19,7 @@ export const fetchIcons = async () => {
 /** IDに紐づくアイコンを取得する */
 export const fetchIcon = async (id: number) => {
   // データを取得する
-  const { data, error } = await clientSupabase.from("icons")
+  const { data, error } = await createClient().from("icons")
       .select('*')
       .eq("id", id).single()
 

@@ -1,9 +1,9 @@
-import { z } from "zod"
 import { SupabaseClient } from "@supabase/supabase-js";
+import { z } from "zod"
 import { FamilyQuestViewSchema } from "./view";
 import { QuestTagEntitySchema } from "@/app/quests/_schema/questTagEntity";
 import { FamilyQuestSearchParams, QuestsFamilyGetResponse } from "./schema";
-
+import { devLog } from "@/app/(core)/util";
 
 /** 取得結果の型 */
 export const FetchQuestsResult = z.array(FamilyQuestViewSchema.extend({
@@ -55,4 +55,32 @@ export const fetchFamilyQuests = async ({
       quests: questsWithAllTags ?? [],
       totalRecords: count ?? 0
     } as QuestsFamilyGetResponse
+}
+
+export const FetchFamilyQuestResult = FamilyQuestViewSchema.extend({
+  quest_tags: z.array(QuestTagEntitySchema)
+})
+
+/** 検索条件に一致するクエストを取得する */
+export const fetchFamilyQuest = async ({
+  supabase,
+  questId
+}: {
+  supabase: SupabaseClient,
+  questId: number
+}) => {
+
+  // データを取得する
+  const { data, error } = await supabase.from("family_quest_view")
+    .select(`
+        *,
+        quest_tags (*)
+      `, { count: 'exact' })
+    .eq("id", questId)
+
+    if (error) throw error
+
+    devLog("fetchFamilyQuest.取得データ: ", data)
+
+    return data.length > 0 ? FetchFamilyQuestResult.parse(data[0]) : undefined
 }

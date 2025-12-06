@@ -30,11 +30,16 @@ export const QuestsFamilyGetResponseSchema = z.object({
 })
 export type QuestsFamilyGetResponse = z.infer<typeof QuestsFamilyGetResponseSchema>
 
-
 /** クエスト挿入リクエストスキーマ */
-export const QuestsFamilyPostRequestSchema = z.object({
+export const PostFamilyQuestRequestSchema = z.object({
   quest: QuestInsertSchema.omit({type: true}),
   familyQuest: FamilyQuestInsertSchema.omit({family_id: true}),
   tags: z.array(QuestTagInsertSchema)
 })
-export type QuestsFamilyPostRequest = z.infer<typeof QuestsFamilyPostRequestSchema>
+export type PostFamilyQuestRequest = z.infer<typeof PostFamilyQuestRequestSchema>
+
+/** クエスト挿入レスポンススキーマ */
+export const PostFamilyQuestResponseSchema = z.object({
+  questId: z.number()
+})
+export type PostFamilyQuestResponse = z.infer<typeof PostFamilyQuestResponseSchema>

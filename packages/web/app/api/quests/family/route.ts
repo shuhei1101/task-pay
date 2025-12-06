@@ -5,7 +5,7 @@ import { fetchUserInfo } from "@/app/api/users/login/query"
 import { ServerError } from "@/app/(core)/appError"
 import { fetchFamilyQuests } from "./query"
 import queryString from "query-string"
-import { FamilyQuestSearchParamsSchema, QuestsFamilyPostRequestSchema } from "./schema"
+import { FamilyQuestSearchParamsSchema, PostFamilyQuestRequestSchema, PostFamilyQuestResponse } from "./schema"
 import { insertFamilyQuest } from "./db"
 
 /** 家族のクエストを取得する */
@@ -40,24 +40,28 @@ export async function POST(
     try {
       // bodyからクエストを取得する
       const body = await request.json()
-      const data  = QuestsFamilyPostRequestSchema.parse(body)
+      const data  = PostFamilyQuestRequestSchema.parse(body)
 
+      // 家族IDを取得する
+      const userInfo = await fetchUserInfo({userId, supabase})
+      if (!userInfo?.family_id) throw new ServerError("家族IDの取得に失敗しました。")
+        
       // クエストを登録する
-      await insertFamilyQuest({
+      const questId = await insertFamilyQuest({
         quest: {
           name: data.quest.name,
           icon: data.quest.icon,
           type: "family"
         },
         familyQuest: {
-          family_id: data.familyQuest.family_id,
+          family_id: userInfo.family_id,
           is_public: data.familyQuest.is_public
         },
         tags: data.tags,
         supabase
       })
 
-      return NextResponse.json({})
+      return NextResponse.json({questId} as PostFamilyQuestResponse)
     } catch (err) {
       return handleServerError(err)
     }

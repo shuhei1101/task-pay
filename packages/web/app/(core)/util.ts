@@ -6,3 +6,14 @@ export const isSameArray = (a: string[], b: string[]) => {
   const set = new Set(a);
   return b.every((item) => set.has(item));
 }
+
+/** 開発時ログ */
+export const devLog = (text: string, obj?: unknown) => {
+  if (process.env.NODE_ENV === "development") {
+    try {
+      console.log(text, obj !== undefined ? JSON.stringify(obj, null, 2) : '')
+    } catch {
+      console.log(text, obj)
+    }
+  }
+}

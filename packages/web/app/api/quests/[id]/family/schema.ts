@@ -1,26 +1,25 @@
-import { QuestDeleteSchema, QuestEntitySchema, QuestUpdateSchema } from "@/app/api/quests/entity"
-import { QuestTagEntitySchema, QuestTagUpdateSchema } from "@/app/quests/_schema/questTagEntity"
+import { QuestDeleteSchema, QuestUpdateSchema } from "@/app/api/quests/entity"
+import { QuestTagUpdateSchema } from "@/app/quests/_schema/questTagEntity"
 import { z } from "zod"
 import { FamilyQuestUpdateSchema } from "../../family/entity"
+import { FetchFamilyQuestResult } from "../../family/query"
 
 /** 家族クエスト取得レスポンススキーマ */
-export const FamilyQuestGetResponseSchema = z.object({
-  quest: QuestEntitySchema.extend({
-    quest_tags: z.array(QuestTagEntitySchema)
-  })
+export const GetFamilyQuestResponseSchema = z.object({
+  quest: FetchFamilyQuestResult
 })
-export type FamilyQuestGetResponse = z.infer<typeof FamilyQuestGetResponseSchema>
+export type GetFamilyQuestResponse = z.infer<typeof GetFamilyQuestResponseSchema>
 
 /** 家族クエスト更新リクエストスキーマ */
-export const FamilyQuestPutRequestSchema = z.object({
+export const PutFamilyQuestRequestSchema = z.object({
   quest: QuestUpdateSchema.omit({type: true}),
   tags: z.array(QuestTagUpdateSchema),
-  familyQuest: FamilyQuestUpdateSchema.omit({family_id: true})
+  family_quest: FamilyQuestUpdateSchema.omit({family_id: true})
 })
-export type FamilyQuestPutRequest = z.infer<typeof FamilyQuestPutRequestSchema>
+export type PutFamilyQuestRequest = z.infer<typeof PutFamilyQuestRequestSchema>
 
 /** 家族クエスト削除リクエストスキーマ */
-export const FamilyQuestDeleteRequestSchema = z.object({
+export const DeleteFamilyQuestRequestSchema = z.object({
   quest: QuestDeleteSchema,
 })
-export type FamilyQuestDeleteRequest = z.infer<typeof FamilyQuestDeleteRequestSchema>
+export type DeleteFamilyQuestRequest = z.infer<typeof DeleteFamilyQuestRequestSchema>

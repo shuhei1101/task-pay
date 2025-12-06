@@ -1,10 +1,11 @@
 import queryString from "query-string"
 import { handleAPIError } from "@/app/(core)/errorHandler";
 import { FAMILY_QUESTS_API_URL } from "@/app/(core)/constants";
-import { FamilyQuestSearchParams, QuestsFamilyGetResponseSchema, QuestsFamilyPostRequest } from "./schema";
+import { FamilyQuestSearchParams, QuestsFamilyGetResponseSchema, PostFamilyQuestRequest, PostFamilyQuestResponseSchema } from "./schema";
+import { devLog } from "@/app/(core)/util";
 
 /** 家族クエストをGETする */
-export const questsFamilyGet = async (params: FamilyQuestSearchParams) => {
+export const getFamilyQuests = async (params: FamilyQuestSearchParams) => {
 
   // クエリストリングを生成する
   const qs = queryString.stringify(params, { arrayFormat: "none" })
@@ -21,13 +22,13 @@ export const questsFamilyGet = async (params: FamilyQuestSearchParams) => {
   }
   const data = await res.json()
 
-  console.log("クエスト取得レスポンス: ", JSON.stringify(data))
+  devLog("getFamilyQuestsの戻り値: ", data)
 
   return QuestsFamilyGetResponseSchema.parse(data)
 }
 
 /** 家族クエストをPOSTする */
-export const questsFamilyPost = async (request: QuestsFamilyPostRequest) => {
+export const postFamilyQuest = async (request: PostFamilyQuestRequest) => {
   // APIを実行する
   const res = await fetch(`${FAMILY_QUESTS_API_URL}`, {
     method: "POST",
@@ -39,4 +40,10 @@ export const questsFamilyPost = async (request: QuestsFamilyPostRequest) => {
   if (!res.ok) {
     await handleAPIError(res)
   }
+
+  const data = await res.json()
+
+  devLog("postFamilyQuestの戻り値: ", data)
+
+  return PostFamilyQuestResponseSchema.parse(data)
 }

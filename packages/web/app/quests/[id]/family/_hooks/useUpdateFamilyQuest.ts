@@ -6,16 +6,17 @@ import { FamilyQuestFormType } from "../form"
 import toast from "react-hot-toast"
 import { handleAppError } from "@/app/(core)/errorHandler"
 import { putFamilyQuest } from "@/app/api/quests/[id]/family/client"
+import { ClientValueError } from "@/app/(core)/appError"
 
 /** 更新ボタン押下時のハンドル */
-export const useUpdateQuest = () => {
+export const useUpdateFamilyQuest = () => {
   const router = useRouter()
   const queryClient = useQueryClient()
 
   /** 更新処理 */
   const mutation = useMutation({
     mutationFn: ({form, questId, updatedAt}: {form: FamilyQuestFormType, questId: number, updatedAt: string}) => putFamilyQuest({
-      familyQuest: {
+      family_quest: {
         is_public: form.isPublic,
       },
       quest: {
@@ -38,7 +39,8 @@ export const useUpdateQuest = () => {
   })
 
   /** 更新ハンドル */
-  const handleUpdate = ({form, questId, updatedAt}: {form: FamilyQuestFormType, questId: number, updatedAt: string}) => {
+  const handleUpdate = ({form, questId, updatedAt}: {form: FamilyQuestFormType, questId?: number, updatedAt?: string}) => {
+    if (!questId || !updatedAt) throw new ClientValueError()
     if (!window.confirm('更新します。よろしいですか？')) return
     mutation.mutate({form, questId, updatedAt})
   }

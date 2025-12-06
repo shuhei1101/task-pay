@@ -1,23 +1,32 @@
 import { NextRequest, NextResponse } from "next/server"
 import { handleServerError } from "@/app/(core)/errorHandler"
 import { withAuth } from "@/app/(core)/withAuth"
-import { deleteQuest, updateQuest } from "../db"
-import { fetchFamilyQuest } from "./query"
-import { FamilyQuestGetResponse } from "./schema"
+import { fetchFamilyQuest } from "../../family/query"
+import { DeleteFamilyQuestRequestSchema, GetFamilyQuestResponse, PutFamilyQuestRequestSchema } from "./schema"
+import { fetchUserInfo } from "@/app/api/users/login/query"
+import { ServerError } from "@/app/(core)/appError"
+import { deleteFamilyQuest, updateFamilyQuest } from "../../family/db"
+import { devLog } from "@/app/(core)/util"
 
 /** 家族クエストを取得する */
 export async function GET(
-  { params }: { params: { id: number } }
+  req: Request,
+  context: { params: Promise<{ id: string }> }
 ) {
   return withAuth(async (supabase) => {
     try {
       // パスパラメータからIDを取得する
-      const id = params.id
+      const params = await context.params
+      const questId = Number(params.id)
+      
+      devLog("GetFamilyQuest.パラメータ.ID: ", params.id)
       
       // 家族クエストを取得する
-      const data = await fetchFamilyQuest({supabase, questId: id })
+      const data = await fetchFamilyQuest({ supabase, questId })
+      
+      devLog("取得した家族クエスト: ", data)
   
-      return NextResponse.json(data as FamilyQuestGetResponse)
+      return NextResponse.json({quest: data} as GetFamilyQuestResponse)
     } catch (err) {
       return handleServerError(err)
     }
@@ -26,32 +35,40 @@ export async function GET(
 
 /** 家族クエストを更新する */
 export async function PUT(
-  request: NextRequest,
-  { params }: { params: { id: number } }
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> }
 ) {
   return withAuth(async (supabase, userId) => {
     try {
       // パスパラメータからIDを取得する
-      const id = params.id
+      const params = await context.params
+      const questId = Number(params.id)
 
       // bodyから家族クエストを取得する
-      const body = await request.json()
-      const data = QuestPutRequestSchema.parse(body)
+      const body = await req.json()
+      const data = PutFamilyQuestRequestSchema.parse(body)
 
+      // 家族IDを取得する
+      const userInfo = await fetchUserInfo({userId, supabase})
+      if (!userInfo?.family_id) throw new ServerError("家族IDの取得に失敗しました。")
+        
       // 家族クエストを更新する
-      await updateQuest({
+      await updateFamilyQuest({
         tags: data.tags,
         quest: {
           icon: data.quest.icon,
           type: "family",
           name: data.quest.name,
-          id: id,
+          id: questId,
           updated_at: data.quest.updated_at
         },
-        supabase
+        supabase,
+        familyQuest: {
+          family_id: userInfo.family_id,
+          is_public: data.family_quest.is_public
+        }
       })
       
-      // メッセージを返却する
       return NextResponse.json({})
     } catch (err) {
       return handleServerError(err)
@@ -61,24 +78,25 @@ export async function PUT(
 
 /** 家族クエストを削除する */
 export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: number } }
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> }
 ) {
-  return withAuth(async (supabase, userId) => {
+  return withAuth(async (supabase) => {
     try {
       // パスパラメータからIDを取得する
-      const id = params.id
+      const params = await context.params
+      const questId = Number(params.id)
 
       // bodyから家族クエストを取得する
-      const body = await request.json()
-      const data = DeleteQuestRequestSchema.parse(body)
+      const body = await req.json()
+      const data = DeleteFamilyQuestRequestSchema.parse(body)
 
       // 家族クエストを削除する
-      await deleteQuest({
+      await deleteFamilyQuest({
         supabase,
         quest: {
-          id,
-          updated_at: data.updated_at,
+          id: questId,
+          updated_at: data.quest.updated_at,
         }
       })
 

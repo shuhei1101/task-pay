@@ -4,6 +4,7 @@ import { QuestDelete, QuestInsert, QuestUpdate } from "@/app/api/quests/entity"
 import { questExclusiveControl } from "./dbHelper"
 import { QuestTagUpdate } from "@/app/quests/_schema/questTagEntity"
 import { FamilyQuestInsert } from "./entity"
+import { z } from "zod"
 
 /** クエストを挿入する */
 export const insertFamilyQuest = async ({quest, familyQuest, tags, supabase}: {
@@ -13,7 +14,7 @@ export const insertFamilyQuest = async ({quest, familyQuest, tags, supabase}: {
   supabase: SupabaseClient
 }) => {
   // レコードを挿入する
-  const { error } = await supabase.rpc("insert_family_quest", {
+  const { data, error } = await supabase.rpc("insert_family_quest", {
     _name: quest.name,
     _family_id: familyQuest.family_id,
     _is_public: familyQuest.is_public,
@@ -27,6 +28,10 @@ export const insertFamilyQuest = async ({quest, familyQuest, tags, supabase}: {
     console.log(error)
     throw new DatabaseError('クエストの作成に失敗しました。')
   }
+
+  const questId = z.number().parse(data)
+
+  return questId
 }
 
 /** クエストを更新する */

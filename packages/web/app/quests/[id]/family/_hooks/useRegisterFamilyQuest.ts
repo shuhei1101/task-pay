@@ -3,19 +3,19 @@
 import { useRouter } from "next/navigation"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { FamilyQuestFormType } from "../form"
-import { questsFamilyPost } from "@/app/api/quests/family/client"
+import { postFamilyQuest } from "@/app/api/quests/family/client"
 import toast from "react-hot-toast"
 import { handleAppError } from "@/app/(core)/errorHandler"
 
 
 /** 登録ボタン押下時のハンドル */
-export const useRegisterQuest = () => {
+export const useRegisterFamilyQuest = ({setId}: {setId: (id: number) => void}) => {
   const router = useRouter()
   const queryClient = useQueryClient()
 
   /** 登録処理 */
   const mutation = useMutation({
-    mutationFn: (form: FamilyQuestFormType) => questsFamilyPost({
+    mutationFn: ({form}: {form: FamilyQuestFormType}) => postFamilyQuest({
       familyQuest: {
         is_public: form.isPublic,
       },
@@ -25,7 +25,9 @@ export const useRegisterQuest = () => {
       },
       tags: form.tags.map(t => { return { name: t }})
     }),
-    onSuccess: () => {
+    onSuccess: ( data ) => {
+      // 取得したIDをセットする
+      setId(data.questId)
       // 家族クエストをリフレッシュする
       queryClient.invalidateQueries({ queryKey: ["familyQuest"] })
       // フィードバックメッセージを表示する
@@ -37,9 +39,9 @@ export const useRegisterQuest = () => {
   })
 
   /** 登録ハンドル */
-  const handleRegister = (taskId: FamilyQuestFormType) => {
+  const handleRegister = ({form}: {form: FamilyQuestFormType}) => {
     if (!window.confirm('登録します。よろしいですか？')) return
-    mutation.mutate(taskId)
+    mutation.mutate({form})
   }
 
   return {

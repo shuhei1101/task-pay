@@ -1,6 +1,6 @@
 import { DatabaseError } from "@/app/(core)/appError"
 import { SupabaseClient } from "@supabase/supabase-js"
-import { fetchQuest } from "../query"
+import { fetchFamilyQuest } from "./query"
 
 export const questExclusiveControl = {
   /** 既に存在するかどうかを確認する */
@@ -8,7 +8,7 @@ export const questExclusiveControl = {
     id: number, 
     supabase: SupabaseClient
   }) => {
-    const record = await fetchQuest({id, supabase})
+    const record = await fetchFamilyQuest({questId: id, supabase})
     if (!record) throw new DatabaseError("既に削除されたクエストです。")
     return record
   },

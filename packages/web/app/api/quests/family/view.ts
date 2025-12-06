@@ -7,6 +7,8 @@ export const FamilyQuestViewSchema = z.object({
   icon: z.string(),
   family_id: z.number(),
   is_public: z.boolean(),
+  updated_at: z.string(),
+  created_at: z.string()
 })
 export type FamilyQuestView = z.infer<typeof FamilyQuestViewSchema>
 
